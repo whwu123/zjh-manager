@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 组件扫描：注解配置 bean -->
+	<context:component-scan base-package="com.zjh.controller" />
+	
+	<!-- 添加注解驱动 -->  
+	<mvc:annotation-driven/>
+	
+	<!-- 配置静态资源过滤 -->
+
+	<mvc:resources mapping="/lib/**" location="/lib/" cache-period="31556926" />
+	<mvc:resources mapping="/static/**" location="/static/" cache-period="31556926" />
+	<mvc:resources mapping="/temp/**" location="/temp/" cache-period="31556926" />
+	<mvc:resources mapping="/ueditor/**" location="/ueditor/" cache-period="31556926" />
+	
+	<!-- 当请求应用程序首页时，将执行/index请求，还可以设定成redirect -->
+	<!-- <mvc:view-controller path="/" view-name="forward:/index" /> -->
+	
+	<!-- jsp视图解析器 -->
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<!-- 前缀：从根目录到视图文件夹 -->
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<!-- 后缀：视图文件的后缀名 -->
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="1"/>
+	</bean>
+	
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件的最大尺寸1024 字节=1K，这里是 30*1024*1024  30M-->
+		<property name="maxUploadSize" value="31457280" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+    <!-- <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en_US"/>
+    </bean>
+	  
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">		
+		<property name="basenames">
+			<list>
+				<value>i18n/messages</value>
+				<value>i18n/global/messages</value>
+				<value>i18n/validate/messages</value>
+			</list>
+		</property>
+	</bean> -->
+	
+    <!-- Spring 主题管理 begin -->
+    <!-- <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+       <property name="basenamePrefix" value="themes."/>
+    </bean>
+    <bean id="themeResolver" class="org.springframework.web.servlet.theme.SessionThemeResolver">
+    	 <property name="defaultThemeName" value="default"/>
+    </bean>   --> 
+    <!-- Spring 主题管理 end -->
+    
+     <!-- Spring Json 转换输出begin -->
+    <!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<ref bean="mappingJacksonHttpMessageConverter"/>
+			</util:list>
+		</property>
+    </bean> -->
+	
+	<!-- <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+    </bean> -->
+    <!-- Spring Json 转换输出end --> 
+    
+    <!-- 统一异常处理,只能拦截Exception,404错误是拦截不了,要单独在web.xml配置 start -->
+    <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+		<!-- 定义默认的异常处理页面，当该异常类型的注册时使用 -->  
+	    <property name="defaultErrorView" value="error/exception"></property>  
+	    <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->  
+	    <property name="exceptionAttribute" value="ex"></property>  
+	    <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->  
+	    <property name="exceptionMappings">  
+	        <props>
+	        	<!-- 这里还可以继续扩展对不同异常类型的处理 -->
+	            <prop key="java.lang.Exception">error/exception</prop>
+	            <prop key="java.lang.RuntimeException">error/exception</prop>
+	        </props>  
+	    </property>
+	    <!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
+        <property name="warnLogCategory" value="WARN"></property>
+	</bean>
+	<!-- 统一异常处理,只能拦截Exception,404错误是拦截不了,要单独在web.xml配置 end -->
+     
+    <!-- <mvc:interceptors>    -->
+        <!-- <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor" />  -->
+        <!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 --> 
+        <!-- <bean class="com.sunrise.wcs.obh.filter.ObhLocaleChangeInterceptor">
+           <property name="defaultLanguage" value="en_US" />
+        </bean> -->
+        <!-- <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />   -->      
+    <!-- </mvc:interceptors>  -->     
+    
+    <!-- 拦截器 -->
+	 <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/login.jsp"/>
+			<mvc:exclude-mapping path="/login.do"/>
+			<bean class="com.zjh.controller.util.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
+        
+</beans>

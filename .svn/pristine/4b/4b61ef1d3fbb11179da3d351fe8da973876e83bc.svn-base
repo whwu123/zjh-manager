@@ -1,0 +1,18 @@
+jdbc.druid.driverClassName=com.mysql.jdbc.Driver
+jdbc.druid.url=jdbc:mysql://47.52.74.53:3306/zjhweb?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+#jdbc.druid.url=jdbc:mysql://192.168.169.221:3306/zjh
+jdbc.druid.username=zjhweb
+jdbc.druid.password=zjhweb
+
+jdbc.druid.initialSize=1
+jdbc.druid.maxActive=20
+jdbc.druid.maxWait=60000
+jdbc.druid.minIdle=1
+jdbc.druid.timeBetweenEvictionRunsMillis=60000
+jdbc.druid.minEvictableIdleTimeMillis=300000
+jdbc.druid.validationQuery=SELECT 1
+jdbc.druid.testWhileIdle=true
+jdbc.druid.testOnBorrow=false
+jdbc.druid.testOnReturn=false
+jdbc.druid.poolPreparedStatements=false
+jdbc.druid.maxPoolPreparedStatementPerConnectionSize=0
