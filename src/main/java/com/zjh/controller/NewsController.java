@@ -159,13 +159,19 @@ public class NewsController extends BaseController {
 		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
 		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
 		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+		        System.out.println("新闻ID:"+news.getId());
 		        News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
 		        if(newsPrev!=null){
-		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='../newsView.html?newsId="+newsPrev.getId()+"'>"+newsPrev.getTitle()+"</a>");
+		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
 		        }else{
 		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
 		        }
-		        htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
+		        News newsNex = NewsSelUtil.getNewsPrev(connection);
+		        if(newsNex!=null){
+		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
+		        }else{
+		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
+		        }
 		        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
 		        news.setStaticpage(newsStaticPage);
 		        if(newsService.update(news)>0){
