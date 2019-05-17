@@ -19,7 +19,7 @@ public class EntityUtils {
      * @return
      */
     public static Connection getConnection(){
-        String url = "jdbc:mysql://127.0.0.12:3306/zjhweb?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
+        String url = "jdbc:mysql://127.0.0.1:3306/zjhweb?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
         String user = "root";
         String password = "root";
         try {
