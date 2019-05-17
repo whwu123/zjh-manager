@@ -20,7 +20,7 @@ public class EntityUtils {
      */
     public static Connection getConnection(){
         String url = "jdbc:mysql://127.0.0.1:3306/zjhweb?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
-        String user = "root"; 
+        String user = "root";
         String password = "root";
         try {
             Class.forName("com.mysql.jdbc.Driver");
