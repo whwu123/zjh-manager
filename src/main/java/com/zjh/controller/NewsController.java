@@ -105,6 +105,10 @@ public class NewsController extends BaseController {
 			} catch (IOException e) {
 				logger.error("upload img fail.", e);
 			} 
+		}else {
+			news.setSysimg("/images/mr1.png");
+        	news.setImg("/images/mr1.png" );
+        	news.setSmallimg("/images/mr1.png");
 		}
 		if(!affixFile.isEmpty()){
 			Affix affixModel = new Affix();
