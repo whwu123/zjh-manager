@@ -73,7 +73,7 @@
 						
 						<c:if test="${obj.sysimg == null }"><td>暂时没有上传封面</td></c:if>
 						<c:if test="${obj.sysimg != null }">
-						<td><img src="${pageContext.request.contextPath}${obj.sysimg}"/></td>
+						<td><img style="width: 50px;height: 50px;"  src="${pageContext.request.contextPath}${obj.sysimg}"/></td>
 						</c:if>
 						<td><fmt:formatDate value="${obj.createtime}" pattern="yyyy-MM-dd HH:mm" /></td>
 						<td class="td-manage">
