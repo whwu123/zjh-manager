@@ -159,7 +159,6 @@ public class NewsController extends BaseController {
 		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
 		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
 		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
-		        System.out.println("新闻ID:"+news.getId());
 		        News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
 		        if(newsPrev!=null){
 		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
@@ -168,7 +167,7 @@ public class NewsController extends BaseController {
 		        }
 		        News newsNex = NewsSelUtil.getNewsPrev(connection);
 		        if(newsNex!=null){
-		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
+		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
 		        }else{
 		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
 		        }
