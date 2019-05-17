@@ -158,4 +158,92 @@
       </if>
     </set>
   </update>
+  
+	<select id="getCountTotal"  resultType="java.lang.Integer">
+		select count(f_id) from items where 1=1
+		<if test="fPid != null and fPid !='' " >
+          and f_pid  like CONCAT('%',#{fPid,jdbcType=VARCHAR},'%')
+        </if>
+		<if test="fKey != null and fKey !='' " >
+          and f_key  like CONCAT('%',#{fKey,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="fTitle != null and fTitle !='' " >
+          and f_title  like CONCAT('%',#{fTitle,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="fType != null" >
+          and f_type  = #{fType,jdbcType=INTEGER}
+        </if>
+        <if test="fOpennewTab != null and fOpennewTab !='' " >
+          and f_opennewtab =  #{fOpennewTab,jdbcType=VARCHAR}
+        </if>
+         <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+        <if test="startTime != null and  startTime!='' ">
+  			<![CDATA[
+  			and f_createtime >= #{startTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+  		<if test="endTime != null and endTime!='' ">
+  			<![CDATA[
+  			and f_createtime <= #{endTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+	</select>  
+	
+	<select id="getList" resultMap="BaseResultMap">
+		select * from items where 1=1
+		<if test="fPid != null and fPid !='' " >
+          and f_pid  like CONCAT('%',#{fPid,jdbcType=VARCHAR},'%')
+        </if>
+		<if test="fKey != null and fKey !='' " >
+          and f_key  like CONCAT('%',#{fKey,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="fTitle != null and fTitle !='' " >
+          and f_title  like CONCAT('%',#{fTitle,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="fType != null" >
+          and f_type  = #{fType,jdbcType=INTEGER}
+        </if>
+        <if test="fOpennewTab != null and fOpennewTab !='' " >
+          and f_opennewtab =  #{fOpennewTab,jdbcType=VARCHAR}
+        </if>
+         <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+        <if test="startTime != null and  startTime!='' ">
+  			<![CDATA[
+  			and f_createtime >= #{startTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+  		<if test="endTime != null and endTime!='' ">
+  			<![CDATA[
+  			and f_createtime <= #{endTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+		order by f_createtime desc limit limit #{pageNum,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getItemsByKeyOrFid" resultMap="BaseResultMap">
+		select * from items where 1=1
+		<if test="fId != null and fId !='' " >
+          and f_id  = #{fId,jdbcType=VARCHAR}
+        </if>
+		<if test="fKey != null and fKey !='' " >
+          and f_key  = #{fKey,jdbcType=VARCHAR}
+        </if>
+         <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+	</select>
+	
+	<select id="getItemsByFpid" resultMap="BaseResultMap">
+		select * from items where 1=1
+		<if test="fPid != null and fPid !='' " >
+          and f_pid  = #{fPid,jdbcType=VARCHAR}
+        </if>
+         <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+	</select>
 </mapper>
