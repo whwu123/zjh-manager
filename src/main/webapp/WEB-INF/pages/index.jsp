@@ -14,8 +14,8 @@
 		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-			<p class="f-20 text-success">welcome to 长沙中竞恒招投标代理有限公司 
-				<span class="f-14">v1.0</span>
+			<p class="f-20 text-success">welcome to 湖南中楷众拓项目管理咨询有限公司 
+				<span class="f-14">v1.2</span>
 			</p>
 <!-- 			<p>登录次数：18 </p> -->
 <!-- 			<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p> -->

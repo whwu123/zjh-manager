@@ -38,6 +38,16 @@
 		</ul>
 	</dd>
 </dl>
+ <dl id="menu-system" >
+			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/admin/system-base.html" title="友链设置">友链设置</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/system-data.html" title="数据字典">数据字典</a></li>
+					<!-- <li><a href="system-log.html" title="系统日志">系统日志</a></li> -->
+		</ul>
+	</dd>
+</dl>
 		
 		<dl id="menu-admin" style="display: none">
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
@@ -50,7 +60,7 @@
 	</dd>
 </dl>
 		
-		<dl id="menu-system"  style="display: none">
+ <dl id="menu-system"  style="display: none">
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>

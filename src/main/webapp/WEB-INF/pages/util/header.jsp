@@ -3,8 +3,8 @@
 <!--_header 作为公共模版分离出去-->
 <header class="navbar-wrapper">
 	<div class="navbar navbar-fixed-top">
-		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/index.html">中竞恒招投标代理</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">中竞恒</a> 
-			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> 
+		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/index.html">湖南中楷众拓项目管理咨询有限公司</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">中竞恒</a> 
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.2</span> 
 			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
 			<nav class="nav navbar-nav">
 				<ul class="cl">

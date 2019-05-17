@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjh.mapper.ItemsMapper" >
+  <resultMap id="BaseResultMap" type="com.zjh.pojo.Items" >
+    <id column="f_id" property="fId" jdbcType="VARCHAR" />
+    <result column="f_pid" property="fPid" jdbcType="VARCHAR" />
+    <result column="f_key" property="fKey" jdbcType="VARCHAR" />
+    <result column="f_title" property="fTitle" jdbcType="VARCHAR" />
+    <result column="f_content" property="fContent" jdbcType="VARCHAR" />
+    <result column="f_descrition" property="fDescrition" jdbcType="VARCHAR" />
+    <result column="f_type" property="fType" jdbcType="INTEGER" />
+    <result column="f_url" property="fUrl" jdbcType="VARCHAR" />
+    <result column="f_opennewtab" property="fOpennewTab" jdbcType="VARCHAR" />
+    <result column="f_imgsrc" property="fImgsrc" jdbcType="VARCHAR" />
+    <result column="f_style" property="fStyle" jdbcType="VARCHAR" />
+    <result column="f_createtime" property="fCreatetime" jdbcType="TIMESTAMP" />
+    <result column="f_status" property="fStatus" jdbcType="INTEGER" />
+    <result column="f_sort" property="fSort" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <insert id="insertSelective" parameterType="com.zjh.pojo.Items" >
+    insert into items
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="fPid != null" >
+        f_pid,
+      </if>
+      <if test="fKey != null" >
+        f_key,
+      </if>
+      <if test="fTitle != null" >
+        f_title,
+      </if>
+      <if test="fContent != null" >
+        f_content,
+      </if>
+      <if test="fDescrition != null" >
+        f_descrition,
+      </if>
+      <if test="fType != null" >
+        f_type,
+      </if>
+      <if test="fUrl != null" >
+        f_url,
+      </if>
+      <if test="fOpennewTab != null" >
+        f_opennewtab,
+      </if>
+      <if test="fImgsrc != null" >
+        f_imgsrc,
+      </if>
+      <if test="fStyle != null" >
+        f_style,
+      </if>
+      <if test="fCreatetime != null" >
+        f_createtime,
+      </if>
+      <if test="fStatus != null" >
+        f_status,
+      </if>
+      <if test="fSort != null" >
+        f_sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fPid != null" >
+        #{fPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fKey != null" >
+        #{fKey,jdbcType=VARCHAR},
+      </if>
+      <if test="fTitle != null" >
+        #{fTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fContent != null" >
+        #{fContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fDescrition != null" >
+        #{fDescrition,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        #{fType,jdbcType=INTEGER},
+      </if>
+      <if test="fUrl != null" >
+        #{fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fOpennewTab != null" >
+        #{fOpennewTab,jdbcType=VARCHAR},
+      </if>
+      <if test="fImgsrc != null" >
+        #{fImgsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="fStyle != null" >
+        #{fStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreatetime != null" >
+        #{fCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fStatus != null" >
+        #{fStatus,jdbcType=INTEGER},
+      </if>
+      <if test="fSort != null" >
+        #{fSort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from items  where f_id = #{fId,jdbcType=VARCHAR}
+  </delete>
+  
+  <update id="updateSelective" parameterType="com.zjh.pojo.Items" >
+    update items
+    <set >
+      <if test="fId != null" >
+        f_id = #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fPid != null" >
+        f_pid = #{fPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fKey != null" >
+        f_key = #{fKey,jdbcType=VARCHAR},
+      </if>
+      <if test="fTitle != null" >
+        f_title = #{fTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fContent != null" >
+        f_content = #{fContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fDescrition != null" >
+        f_descrition = #{fDescrition,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        f_type = #{fType,jdbcType=INTEGER},
+      </if>
+       <if test="fUrl != null" >
+        f_url = #{fUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fOpennewTab != null" >
+        f_opennewtab = #{fOpennewTab,jdbcType=VARCHAR},
+      </if>
+      <if test="fImgsrc != null" >
+        f_imgsrc = #{fImgsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="fStyle != null" >
+        f_style = #{fStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus !=null">
+    	f_status = #{fStatus,jdbcType=INTEGER},
+      </if>
+      <if test="fSort !=null">
+    	f_sort = #{fSort,jdbcType=INTEGER},
+      </if>
+    </set>
+  </update>
+</mapper>
