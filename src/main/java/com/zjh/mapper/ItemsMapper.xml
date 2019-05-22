@@ -117,9 +117,7 @@
   <update id="updateSelective" parameterType="com.zjh.pojo.Items" >
     update items
     <set >
-      <if test="fId != null" >
-        f_id = #{fId,jdbcType=VARCHAR},
-      </if>
+     
       <if test="fPid != null" >
         f_pid = #{fPid,jdbcType=VARCHAR},
       </if>
@@ -133,7 +131,7 @@
         f_content = #{fContent,jdbcType=VARCHAR},
       </if>
       <if test="fDescrition != null" >
-        f_descrition = #{fDescrition,jdbcType=VARCHAR},
+        f_description = #{fDescrition,jdbcType=VARCHAR},
       </if>
       <if test="fType != null" >
         f_type = #{fType,jdbcType=INTEGER},
@@ -157,6 +155,7 @@
     	f_sort = #{fSort,jdbcType=INTEGER},
       </if>
     </set>
+    where  f_id = #{fId,jdbcType=VARCHAR}
   </update>
   
   

@@ -80,9 +80,6 @@ public class ItemsServiceImpl implements ItemsService {
 
 	@Override
 	public Items selectItemsByFid(String fId, Integer fStatus) {
-		if(fStatus==null) {
-			fStatus = 1;
-		}
 		return itemsMapper.selectItemsByFid(fId, fStatus);
 	}
 

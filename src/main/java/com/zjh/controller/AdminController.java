@@ -62,4 +62,25 @@ public class AdminController extends BaseController {
 			return "fail";
 		}
 	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String update(Model model,Items items) {
+		if(items!=null) {
+			if(itemsService.updateSelective(items)) {
+				return "success";
+			}
+		}
+		return "fail";
+	}
+	
+	@RequestMapping(value = "/items_del", method = RequestMethod.POST)
+	@ResponseBody
+	public String items_del(Model model,String fId) {
+		if(fId!=null) {
+			if(itemsService.deleteByPrimaryKey(fId)) {
+				return "success";
+			}
+		}
+		return "fail";
+	}
 }

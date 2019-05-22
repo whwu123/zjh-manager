@@ -28,11 +28,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</p>
 				</div>
 				<a href="<%=basePath %>index.do" title="返回SJ5D首页">
-					<div class="link" id="home"></div>
+					<div class="link" id="home" style="height: 70px;"></div>
 				</a>
 				<a href="<%=basePath %>index.do" title="联系管理员">
-					<div class="link" id="contact"></div>
-
+					<div class="link" id="contact" style="height: 70px;"></div>
 				</a>
 			</div>
 		</div>

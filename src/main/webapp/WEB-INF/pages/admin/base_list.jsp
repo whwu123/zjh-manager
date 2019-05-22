@@ -72,8 +72,8 @@
 							<fmt:formatDate value="${item.fCreatetime  }" pattern="yyyy-MM-dd HH:mm"/>
 						</td>
 						<td class="td-manage">
-							<a title="查看" style="text-decoration:none" onClick="affix_download(this,'${item.fId }')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i></a>
-							<a title="删除" href="javascript:;" onclick="affix_del(this,'${item.fId }')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+							<a title="查看" style="text-decoration:none" onClick="show_item('查看','${pageContext.request.contextPath}/admin/add-base.html?fId=${item.fId }')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i></a>
+							<a title="删除" href="javascript:;" onclick="items_del(this,'${item.fId }')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
 						 </td>
 					</tr>
 				</c:forEach>
@@ -110,25 +110,33 @@
 function my_affix_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
-/*附件-下载*/
-function affix_download(obj,id){
-	window.location.href = "${pageContext.request.contextPath}/affix/download.do?id="+id;
+
+function show_item(title,url){
+	/* var index = layer.open({
+		type: 2,
+		title: title,
+		content: url,
+		width:900,
+		heigth:500
+	});
+	layer.full(index); */
+	layer_show(title,url,900,600);
 	
 }
 /*附件-删除*/
-function affix_del(obj,id){
+function items_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 		//此处请求后台程序，下方是成功后的前台处理……
 		$.ajax({
-			url:"${pageContext.request.contextPath}/affix/affix_del.do",
+			url:"${pageContext.request.contextPath}/admin/items_del.do",
             type:"post",
-            data:{id:id},
+            data:{fId:id},
             success:function(data){
- 				if(data>0){
+ 				if(data == "success"){
  					$(obj).parents("tr").remove();
  					layer.msg('已删除!',{icon:1,time:1000});
  				}else{
- 					layer.msg('删除附件失败!',{icon:1,time:3000});
+ 					layer.msg('删除失败!',{icon:1,time:3000});
  				}
             }
 		})
