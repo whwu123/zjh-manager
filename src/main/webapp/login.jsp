@@ -23,11 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--[if IE 6]>
 <script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script><![endif]-->
-<title>中竞恒</title>
+<title>中楷众拓</title>
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header" style="background: #426374;line-height: 60px;font-size: 30px;color: #EAEDF3;">&nbsp;&nbsp;中竞恒招投标 后台管理系统</div>
+<div class="header" style="background: #426374;line-height: 60px;font-size: 30px;color: #EAEDF3;">&nbsp;&nbsp;中楷众拓 后台管理系统</div>
 <div class="loginWraper">
 	<div id="loginform" class="loginBox">
 		<form class="form form-horizontal" action="login.do" method="post">
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</form>
 	</div>
 </div>
-<div class="footer" style="font-family: '微软雅黑;'">Copyright 长沙中竞恒招投标代理有限公司</div>
+<div class="footer" style="font-family: '微软雅黑;'">Copyright 湖南中楷众拓项目管理咨询有限公司</div>
 
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
