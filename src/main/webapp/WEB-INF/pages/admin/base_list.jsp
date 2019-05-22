@@ -13,26 +13,34 @@
 <section class="Hui-article-box">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
 		<span class="c-gray en">&gt;</span>
-		附件管理
+		链接管理
 		<span class="c-gray en">&gt;</span>
-		附件列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+		链接列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="${pageContext.request.contextPath}/affix/affix_list.do" method="post" id="checkForm">
+		<form action="${pageContext.request.contextPath}/admin/system-base.do" method="post" id="checkForm">
 			<div class="text-c"> 日期范围：
 				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemin" class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime }">
 				-
 				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemax" class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime }">
-				<input type="text" class="input-text" style="width:250px" placeholder="输入附件名称" id="affixName" name="affixName" value="${affixName}">
+				<input type="text" class="input-text" style="width:250px" placeholder="输入链接名称" id="fTitle" name="fTitle" value="${fTitle}">
+				<span class="select-box" style="width: 120px;">
+				状态：
+	  				<select name="fStatus" class="select"  size="1" name="demo1" style="width: 55px;">
+							<option value="" >全部</option>
+							<option value="1" >启用</option>
+							<option value="0" >禁用</option>
+					</select>
+				</span>
 				<input  id="currentPageNum"  type="hidden" name="pageNum" value="${pageView.pageNum }"/>
 				<input  id="currentTotalPage"  type="hidden" name="currentTotalPage" value="${pageView.totalPage }"/>
-				<button type="button" class="btn btn-success" id="checkAffix" name="checkAffix" onclick="shouAffix();"><i class="Hui-iconfont">&#xe665;</i> 搜附件</button>
+				<button type="button" class="btn btn-success" id="checkAffix" name="checkAffix" onclick="shouAffix();"><i class="Hui-iconfont">&#xe665;</i> 搜链接</button>
 			</div>
 		</form>
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l"> 
 <!-- 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>  -->
-				<a href="javascript:;" onclick="my_affix_add('添加链接','${pageContext.request.contextPath}/affix/add_affix.html','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加附件</a> </span>
+				<a href="javascript:;" onclick="my_affix_add('添加链接','${pageContext.request.contextPath}/admin/add-base.html','900','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加链接</a> </span>
 				<span class="r">当前页码：<strong >${pageView.pageNum }</strong> / <strong >${pageView.totalPage }</strong>&nbsp;&nbsp;&nbsp;  共有数据：<strong id="affixTotalCount">${pageView.totalCount }</strong> 条</span>
 			</div>
 			<div class="mt-20">
@@ -42,34 +50,30 @@
 						<th scope="col" colspan="9">链接列表</th>
 					</tr>
 					<tr class="text-c">
-						<th width="25"><input type="checkbox" name="" value=""></th>
-						<th width="40">ID</th>
+						<th width="40">序号</th>
 						<th width="150">名称</th>
-						<th width="200">描述</th>
-						<th width="60">类型</th>
-						<th width="50">大小</th>
+						<th width="150">URL</th>
+						<th width="80">状态</th>
 						<th width="120">创建时间</th>
 						<th width="130">操作</th>
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="affix" items="${pageView.listData }">
+				<c:forEach var="item" items="${pageView.listData }" varStatus="vs">
 					<tr class="text-c">
-						<td><input type="checkbox" value="1" name=""></td>
-						<td>${affix.id }</td>
-						<td>${affix.affixname }</td>
-						<td>${affix.descrption }</td>
-						<td>${affix.affixtype }</td>
+						<td>${vs.count }</td>
+						<td>${item.fTitle }</td>
+						<td>${item.fUrl }</td>
 						<td>
-							<fmt:formatNumber type="number" value="${affix.size/1024/1024 }" pattern="0.00" maxFractionDigits="2"/>  M
+							<c:if test="${item.fStatus == 1 }">启用</c:if>
+							<c:if test="${item.fStatus == 0 }">禁用</c:if>
 						</td>
 						<td>
-							<fmt:formatDate value="${affix.affixtime  }" pattern="yyyy-MM-dd HH:mm"/>
+							<fmt:formatDate value="${item.fCreatetime  }" pattern="yyyy-MM-dd HH:mm"/>
 						</td>
-	
 						<td class="td-manage">
-							<a title="下载" style="text-decoration:none" onClick="affix_download(this,'${affix.id}')" href="javascript:;" ><i class="Hui-iconfont">&#xe640;</i></a>
-							<a title="删除" href="javascript:;" onclick="affix_del(this,'${affix.id}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+							<a title="查看" style="text-decoration:none" onClick="affix_download(this,'${item.fId }')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i></a>
+							<a title="删除" href="javascript:;" onclick="affix_del(this,'${item.fId }')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
 						 </td>
 					</tr>
 				</c:forEach>

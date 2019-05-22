@@ -17,10 +17,10 @@ public interface ItemsMapper {
 	
 
 	//取得分页总数量
-	int getCountTotal(Map<String, Object> items);
+	int getCountTotal(@Param("items")Map<String, Object> items);
 	
 	//取得分页数据
-	List<Items> getList(Map<String, Object> items);
+	List<Items> getList(@Param("items")Map<String, Object> items);
 	
 	Items selectItemsByFid(@Param("fId")String fId,@Param("fStatus")Integer fStatus);
 	

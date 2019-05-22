@@ -37,7 +37,7 @@
         f_content,
       </if>
       <if test="fDescrition != null" >
-        f_descrition,
+        f_description,
       </if>
       <if test="fType != null" >
         f_type,
@@ -163,67 +163,67 @@
   
 	<select id="getCountTotal"  resultType="java.lang.Integer">
 		select count(f_id) from items where 1=1
-		<if test="fPid != null and fPid !='' " >
-          and f_pid  like CONCAT('%',#{fPid,jdbcType=VARCHAR},'%')
+		<if test="items.fPid != null and items.fPid !='' " >
+          and f_pid  like CONCAT('%',#{items.fPid,jdbcType=VARCHAR},'%')
         </if>
-		<if test="fKey != null and fKey !='' " >
-          and f_key  like CONCAT('%',#{fKey,jdbcType=VARCHAR},'%')
+		<if test="items.fKey != null and items.fKey !='' " >
+          and f_key  like CONCAT('%',#{items.fKey,jdbcType=VARCHAR},'%')
         </if>
-        <if test="fTitle != null and fTitle !='' " >
-          and f_title  like CONCAT('%',#{fTitle,jdbcType=VARCHAR},'%')
+        <if test="items.fTitle != null and items.fTitle !='' " >
+          and f_title  like CONCAT('%',#{items.fTitle,jdbcType=VARCHAR},'%')
         </if>
-        <if test="fType != null" >
+        <if test="items.fType != null" >
           and f_type  = #{fType,jdbcType=INTEGER}
         </if>
-        <if test="fOpennewTab != null and fOpennewTab !='' " >
-          and f_opennewtab =  #{fOpennewTab,jdbcType=VARCHAR}
+        <if test="items.fOpennewTab != null and items.fOpennewTab !='' " >
+          and f_opennewtab =  #{items.fOpennewTab,jdbcType=VARCHAR}
         </if>
-         <if test="fStatus != null" >
-          and f_status  = #{fStatus,jdbcType=INTEGER}
+         <if test="items.fStatus != null" >
+          and f_status  = #{items.fStatus,jdbcType=INTEGER}
         </if>
-        <if test="startTime != null and  startTime!='' ">
+        <if test="items.startTime != null and  items.startTime!='' ">
   			<![CDATA[
-  			and f_createtime >= #{startTime,jdbcType=TIMESTAMP}
+  			and f_createtime >= #{items.startTime,jdbcType=TIMESTAMP}
   			]]>
   		</if>
-  		<if test="endTime != null and endTime!='' ">
+  		<if test="items.endTime != null and items.endTime!='' ">
   			<![CDATA[
-  			and f_createtime <= #{endTime,jdbcType=TIMESTAMP}
+  			and f_createtime <= #{items.endTime,jdbcType=TIMESTAMP}
   			]]>
   		</if>
 	</select>  
 	
 	<select id="getList" resultMap="BaseResultMap">
 		select * from items where 1=1
-		<if test="fPid != null and fPid !='' " >
-          and f_pid  like CONCAT('%',#{fPid,jdbcType=VARCHAR},'%')
+		<if test="items.fPid != null and items.fPid !='' " >
+          and f_pid  like CONCAT('%',#{items.fPid,jdbcType=VARCHAR},'%')
         </if>
-		<if test="fKey != null and fKey !='' " >
-          and f_key  like CONCAT('%',#{fKey,jdbcType=VARCHAR},'%')
+		<if test="items.fKey != null and items.fKey !='' " >
+          and f_key  like CONCAT('%',#{items.fKey,jdbcType=VARCHAR},'%')
         </if>
-        <if test="fTitle != null and fTitle !='' " >
-          and f_title  like CONCAT('%',#{fTitle,jdbcType=VARCHAR},'%')
+        <if test="items.fTitle != null and items.fTitle !='' " >
+          and f_title  like CONCAT('%',#{items.fTitle,jdbcType=VARCHAR},'%')
         </if>
-        <if test="fType != null" >
-          and f_type  = #{fType,jdbcType=INTEGER}
+        <if test="items.fType != null" >
+          and f_type  = #{items.fType,jdbcType=INTEGER}
         </if>
-        <if test="fOpennewTab != null and fOpennewTab !='' " >
-          and f_opennewtab =  #{fOpennewTab,jdbcType=VARCHAR}
+        <if test="items.fOpennewTab != null and items.fOpennewTab !='' " >
+          and f_opennewtab =  #{items.fOpennewTab,jdbcType=VARCHAR}
         </if>
-         <if test="fStatus != null" >
-          and f_status  = #{fStatus,jdbcType=INTEGER}
+         <if test="items.fStatus != null" >
+          and f_status  = #{items.fStatus,jdbcType=INTEGER}
         </if>
-        <if test="startTime != null and  startTime!='' ">
+        <if test="items.startTime != null and  items.startTime!='' ">
   			<![CDATA[
-  			and f_createtime >= #{startTime,jdbcType=TIMESTAMP}
+  			and f_createtime >= #{items.startTime,jdbcType=TIMESTAMP}
   			]]>
   		</if>
-  		<if test="endTime != null and endTime!='' ">
+  		<if test="items.endTime != null and items.endTime!='' ">
   			<![CDATA[
-  			and f_createtime <= #{endTime,jdbcType=TIMESTAMP}
+  			and f_createtime <= #{items.endTime,jdbcType=TIMESTAMP}
   			]]>
   		</if>
-		order by f_createtime desc limit limit #{pageNum,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+		order by f_createtime desc LIMIT #{items.pagenum},#{items.pagesize}
 	</select>
 	
 	<select id="selectItemsByKey" resultMap="BaseResultMap">

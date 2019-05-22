@@ -34,13 +34,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="row cl">
 				<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 				<div class="formControls col-xs-8">
-					<input id="userName" name="userName" type="text" placeholder="账户" class="input-text size-L">
+					<input id="userName" name="userName" type="text" placeholder="账户" class="input-text size-L" value="admin"/>
 				</div>
 			</div>
 			<div class="row cl">
 				<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
 				<div class="formControls col-xs-8">
-					<input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
+					<input id="password" name="password" type="password" placeholder="密码" class="input-text size-L" value="11">
 				</div>
 			</div>
 <!-- 			<div class="row cl"> -->

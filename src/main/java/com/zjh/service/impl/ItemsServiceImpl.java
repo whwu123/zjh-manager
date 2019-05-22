@@ -56,8 +56,8 @@ public class ItemsServiceImpl implements ItemsService {
 		pageView.setTotalCount(totalCount);
 		//根据条件查询分页的数据
 		if(totalCount>0) {
-			itemsMap.put("pageNum", (pageNum-1)*pageSize);
-			itemsMap.put("pageSize", pageSize);
+			itemsMap.put("pagenum", (pageNum-1)*pageSize);
+			itemsMap.put("pagesize",pageSize);
 			list = itemsMapper.getList(itemsMap);
 			//计算出总页数
 			int totalPage = (totalCount+pageSize-1)/pageSize;
