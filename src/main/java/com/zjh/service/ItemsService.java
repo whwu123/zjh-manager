@@ -1,6 +1,9 @@
 package com.zjh.service;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zjh.base.PageView;
 import com.zjh.pojo.Items;
 
@@ -11,10 +14,14 @@ public interface ItemsService {
 	
 	boolean updateSelective(Items items);
 	
+	
 	PageView<Items> getList(String fPid,String fKey,String fTitle,Integer fType,String fOpennewTab,
 			Integer fStatus,String startTime,String endTime,int pageNum,int pageSize);
 	
-	Items getItemsByKeyOrFid(String fKey,String fId,Integer fStatus);
+	Items selectItemsByFid(String fId,Integer fStatus);
+	
+	Items selectItemsByKey(String fKey,Integer fStatus);
 	
 	List<Items> getItemsByFpid(String fPid,Integer fStatus);
+	
 }

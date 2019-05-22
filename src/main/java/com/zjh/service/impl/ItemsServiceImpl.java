@@ -69,13 +69,6 @@ public class ItemsServiceImpl implements ItemsService {
 		return pageView;
 	}
 
-	@Override
-	public Items getItemsByKeyOrFid(String fKey, String fId, Integer fStatus) {
-		if(fStatus==null) {
-			fStatus = 1;
-		}
-		return itemsMapper.getItemsByKeyOrFid(fKey, fId, fStatus);
-	}
 
 	@Override
 	public List<Items> getItemsByFpid(String fPid, Integer fStatus) {
@@ -83,6 +76,22 @@ public class ItemsServiceImpl implements ItemsService {
 			fStatus = 1;
 		}
 		return itemsMapper.getItemsByFpid(fPid, fStatus);
+	}
+
+	@Override
+	public Items selectItemsByFid(String fId, Integer fStatus) {
+		if(fStatus==null) {
+			fStatus = 1;
+		}
+		return itemsMapper.selectItemsByFid(fId, fStatus);
+	}
+
+	@Override
+	public Items selectItemsByKey(String fKey, Integer fStatus) {
+		if(fStatus==null) {
+			fStatus = 1;
+		}
+		return itemsMapper.selectItemsByKey(fKey, fStatus);
 	}
 
 }

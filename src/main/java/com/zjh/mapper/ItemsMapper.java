@@ -15,13 +15,16 @@ public interface ItemsMapper {
 	
 	int updateSelective(Items items);
 	
+
 	//取得分页总数量
 	int getCountTotal(Map<String, Object> items);
 	
 	//取得分页数据
 	List<Items> getList(Map<String, Object> items);
 	
-	Items getItemsByKeyOrFid(@Param("fKey")String fKey,@Param("fId")String fId,@Param("fStatus")Integer fStatus);
+	Items selectItemsByFid(@Param("fId")String fId,@Param("fStatus")Integer fStatus);
+	
+	Items selectItemsByKey(@Param("fKey")String fKey,@Param("fStatus")Integer fStatus);
 	
 	List<Items> getItemsByFpid(@Param("fPid")String fPid,@Param("fStatus")Integer fStatus);
 }
