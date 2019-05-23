@@ -83,4 +83,21 @@ public class AdminController extends BaseController {
 		}
 		return "fail";
 	}
+	
+	@RequestMapping("/system-data")
+	public String data(Model model,String fKey, Integer pageNum,String startTime,String endTime,Integer fType,String fTitle,Integer fStatus) {
+		if(pageNum==null){
+			pageNum=1;
+		}
+		int pageSize = 10;
+		PageView<Items> pageView   = itemsService.getList(null, fKey, fTitle, fType, null, fStatus, startTime, endTime, pageNum, pageSize);
+		model.addAttribute("pageView", pageView);
+		model.addAttribute("startTime", startTime);
+		model.addAttribute("endTime", endTime);
+		model.addAttribute("fKey", fKey);
+		model.addAttribute("fType", fType);
+		model.addAttribute("fTitle", fTitle);
+		model.addAttribute("fStatus", fStatus);
+		return "admin/base_data";
+	}
 }
