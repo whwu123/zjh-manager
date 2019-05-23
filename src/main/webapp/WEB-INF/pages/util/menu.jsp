@@ -43,7 +43,7 @@
 			<dd>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/admin/system-base.html" title="友链设置">友链设置</a></li>
-					<li><a href="${pageContext.request.contextPath}/admin/system-data.html" title="数据字典">数据字典</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/system-data.html" title="数据字典">系统配置</a></li>
 					<!-- <li><a href="system-log.html" title="系统日志">系统日志</a></li> -->
 		</ul>
 	</dd>
