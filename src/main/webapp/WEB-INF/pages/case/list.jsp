@@ -20,9 +20,9 @@
 			<div class="text-c">
 				<form action="${pageContext.request.contextPath}/case/list.html" method="post" id="form1">
 					日期范围：<input type="hidden" id="page" name="page" value="${pageInfo.pageNum}">
-					<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemin" class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime}">
+					<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="开始时间"  id="datemin" class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime}">
 					-
-					<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemax" class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime}">
+					<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="结束时间"  id="datemax" class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime}">
 					<input type="text" class="input-text" style="width:250px" placeholder="输入案例名称" name="keyWord" value="${keyWord}">
 					<button type="submit" class="btn btn-success search"><i class="Hui-iconfont">&#xe665;</i> 搜案例</button>
 				</form>

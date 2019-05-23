@@ -20,9 +20,9 @@
 		<article class="cl pd-20">
 		<form action="${pageContext.request.contextPath}/admin/system-base.do" method="post" id="checkForm">
 			<div class="text-c"> 日期范围：
-				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemin" class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime }">
+				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemin" placeholder="开始时间"  class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime }">
 				-
-				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemax" class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime }">
+				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemax" placeholder="结束时间"  class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime }">
 				<input type="text" class="input-text" style="width:250px" placeholder="输入链接名称" id="fTitle" name="fTitle" value="${fTitle}">
 				<span class="select-box" style="width: 120px;">
 				状态：

@@ -7,7 +7,7 @@
     <result column="f_key" property="fKey" jdbcType="VARCHAR" />
     <result column="f_title" property="fTitle" jdbcType="VARCHAR" />
     <result column="f_content" property="fContent" jdbcType="VARCHAR" />
-    <result column="f_descrition" property="fDescrition" jdbcType="VARCHAR" />
+    <result column="f_description" property="fDescrition" jdbcType="VARCHAR" />
     <result column="f_type" property="fType" jdbcType="INTEGER" />
     <result column="f_url" property="fUrl" jdbcType="VARCHAR" />
     <result column="f_opennewtab" property="fOpennewTab" jdbcType="VARCHAR" />
@@ -172,7 +172,7 @@
           and f_title  like CONCAT('%',#{items.fTitle,jdbcType=VARCHAR},'%')
         </if>
         <if test="items.fType != null" >
-          and f_type  = #{fType,jdbcType=INTEGER}
+          and f_type  = #{items.fType,jdbcType=INTEGER}
         </if>
         <if test="items.fOpennewTab != null and items.fOpennewTab !='' " >
           and f_opennewtab =  #{items.fOpennewTab,jdbcType=VARCHAR}

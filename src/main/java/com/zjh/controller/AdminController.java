@@ -28,6 +28,9 @@ public class AdminController extends BaseController {
 			pageNum=1;
 		}
 		int pageSize = 10;
+		if(fType == null) {
+			fType = 1;
+		}
 		PageView<Items> pageView   = itemsService.getList(null, fKey, fTitle, fType, null, fStatus, startTime, endTime, pageNum, pageSize);
 		model.addAttribute("pageView", pageView);
 		model.addAttribute("startTime", startTime);
@@ -90,6 +93,9 @@ public class AdminController extends BaseController {
 			pageNum=1;
 		}
 		int pageSize = 10;
+		if(fType == null) {
+			fType = 2;
+		}
 		PageView<Items> pageView   = itemsService.getList(null, fKey, fTitle, fType, null, fStatus, startTime, endTime, pageNum, pageSize);
 		model.addAttribute("pageView", pageView);
 		model.addAttribute("startTime", startTime);
@@ -99,5 +105,13 @@ public class AdminController extends BaseController {
 		model.addAttribute("fTitle", fTitle);
 		model.addAttribute("fStatus", fStatus);
 		return "admin/base_data";
+	}
+	@RequestMapping(value = "/add-base-data", method = RequestMethod.GET)
+	public String addbasedata(Model model,String fId) {
+		// 新增页/更新页
+		if (fId != null && !fId.isEmpty()) {
+			model.addAttribute("items", itemsService.selectItemsByFid(fId, null));
+		}
+		return "admin/add_base_data";
 	}
 }

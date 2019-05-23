@@ -4,7 +4,7 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="../util/meta.jsp"></jsp:include>
 
-<title>链接管理</title>
+<title>配置管理</title>
 </head>
 <body>
 <jsp:include page="../util/header.jsp"></jsp:include>
@@ -13,48 +13,50 @@
 <section class="Hui-article-box">
 	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
 		<span class="c-gray en">&gt;</span>
-		链接管理
+		配置管理
 		<span class="c-gray en">&gt;</span>
-		链接列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+		配置列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
-		<form action="${pageContext.request.contextPath}/admin/system-base.do" method="post" id="checkForm">
+		<form action="${pageContext.request.contextPath}/admin/system-data.do" method="post" id="checkForm">
 			<div class="text-c"> 日期范围：
-				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemin" class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime }">
+				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemin" placeholder="开始时间"  class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime }">
 				-
-				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemax" class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime }">
-				<input type="text" class="input-text" style="width:250px" placeholder="输入链接名称" id="fTitle" name="fTitle" value="${fTitle}">
+				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemax" placeholder="结束时间"  class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime }">
+				<input type="text" class="input-text" style="width:200px" placeholder="输入配置名称" id="fTitle" name="fTitle" value="${fTitle}">
+				<input type="text" class="input-text" style="width:200px" placeholder="输入关键词" id="fKey" name="fKey" value="${fKey}">
 				<span class="select-box" style="width: 120px;">
 				状态：
 	  				<select name="fStatus" class="select"  size="1" name="demo1" style="width: 55px;">
 							<option value="" >全部</option>
-							<option value="1" >启用</option>
-							<option value="0" >禁用</option>
+							<option value="1" <c:if test="${fStatus ==1 }">selected="selected"</c:if>>启用</option>
+							<option value="0" <c:if test="${fStatus ==0 }">selected="selected"</c:if>>禁用</option>
 					</select>
 				</span>
 				<input  id="currentPageNum"  type="hidden" name="pageNum" value="${pageView.pageNum }"/>
 				<input  id="currentTotalPage"  type="hidden" name="currentTotalPage" value="${pageView.totalPage }"/>
-				<button type="button" class="btn btn-success" id="checkAffix" name="checkAffix" onclick="shouAffix();"><i class="Hui-iconfont">&#xe665;</i> 搜链接</button>
+				<button type="button" class="btn btn-success" id="checkAffix" name="checkAffix" onclick="shouAffix();"><i class="Hui-iconfont">&#xe665;</i> 搜配置</button>
 			</div>
 		</form>
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
 				<span class="l"> 
 <!-- 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>  -->
-				<a href="javascript:;" onclick="my_affix_add('添加链接','${pageContext.request.contextPath}/admin/add-base.html','900','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加链接</a> </span>
+				<a href="javascript:;" onclick="my_affix_add('添加配置','${pageContext.request.contextPath}/admin/add-base-data.html','900','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加配置</a> </span>
 				<span class="r">当前页码：<strong >${pageView.pageNum }</strong> / <strong >${pageView.totalPage }</strong>&nbsp;&nbsp;&nbsp;  共有数据：<strong id="affixTotalCount">${pageView.totalCount }</strong> 条</span>
 			</div>
 			<div class="mt-20">
 				<table class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
 					<tr>
-						<th scope="col" colspan="9">链接列表</th>
+						<th scope="col" colspan="9">配置列表</th>
 					</tr>
 					<tr class="text-c">
 						<th width="40">序号</th>
 						<th width="150">名称</th>
-						<th width="150">URL</th>
-						<th width="80">状态</th>
-						<th width="120">创建时间</th>
+						<th width="150">内容</th>
+						<th width="60">状态</th>
+						<th width="100">创建时间</th>
+						<th width="120">关键词</th>
 						<th width="130">操作</th>
 					</tr>
 				</thead>
@@ -63,7 +65,7 @@
 					<tr class="text-c">
 						<td>${vs.count }</td>
 						<td>${item.fTitle }</td>
-						<td>${item.fUrl }</td>
+						<td>${item.fContent }</td>
 						<td>
 							<c:if test="${item.fStatus == 1 }">启用</c:if>
 							<c:if test="${item.fStatus == 0 }">禁用</c:if>
@@ -71,8 +73,9 @@
 						<td>
 							<fmt:formatDate value="${item.fCreatetime  }" pattern="yyyy-MM-dd HH:mm"/>
 						</td>
+						<td>${item.fKey }</td>
 						<td class="td-manage">
-							<a title="查看" style="text-decoration:none" onClick="show_item('查看','${pageContext.request.contextPath}/admin/add-base.html?fId=${item.fId }')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i></a>
+							<a title="查看" style="text-decoration:none" onClick="show_item('查看','${pageContext.request.contextPath}/admin/add-base-data.html?fId=${item.fId }')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i></a>
 							<a title="删除" href="javascript:;" onclick="items_del(this,'${item.fId }')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
 						 </td>
 					</tr>

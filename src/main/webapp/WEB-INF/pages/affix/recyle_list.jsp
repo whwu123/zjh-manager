@@ -20,9 +20,9 @@
 		<article class="cl pd-20">
 		<form action="${pageContext.request.contextPath}/affix/recycle_list.do" method="post" id="checkForm">
 			<div class="text-c"> 日期范围：
-				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemin" class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime }">
+				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="开始时间"  id="datemin" class="input-text Wdate" style="width:150px;" name="startTime" value="${startTime }">
 				-
-				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" id="datemax" class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime }">
+				<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="结束时间"  id="datemax" class="input-text Wdate" style="width:150px;" name="endTime" value="${endTime }">
 				<input type="text" class="input-text" style="width:250px" placeholder="输入附件名称" id="affixName" name="affixName" value="${affixName}">
 				<input  id="currentPageNum"  type="hidden" name="pageNum" value="${pageView.pageNum }"/>
 				<input  id="currentTotalPage"  type="hidden" name="currentTotalPage" value="${pageView.totalPage }"/>
