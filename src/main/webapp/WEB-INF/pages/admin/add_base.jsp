@@ -3,7 +3,7 @@
 <jsp:include page="../util/meta.jsp"></jsp:include>
 
 <link href="${pageContext.request.contextPath}/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
-<title>新闻管理</title>
+<title>链接管理</title>
 </head>
 <body>
 <article class="page-container">
