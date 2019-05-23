@@ -4,7 +4,7 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jsp:include page="../util/meta.jsp"></jsp:include>
 
-<title>附件管理</title>
+<title>链接管理</title>
 </head>
 <body>
 <jsp:include page="../util/header.jsp"></jsp:include>
