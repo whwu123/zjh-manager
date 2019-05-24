@@ -86,17 +86,16 @@ var _hmt = _hmt || [];
   $("#login").click(function(){
   	var userName = $("#userName").val();
   	var password = $("#password").val();
-  	
+ 
   	var sendUserName = encode64(userName);
   	var serdPassword = encode64(password);
-  
   	$.ajax({
   	 	url:'login.do',  
         type:'post',  
         data:{userName:sendUserName,password:serdPassword},  
         success:function(data){  
         	   if(data=="success"){ 
-        	   	   layer.msg('登录成功！正在进入首页!请稍后~~~',{icon:1,time:1000});
+        	   	  // layer.msg('登录成功！正在进入首页!请稍后~~~',{icon:1,time:1500});
                    location.href = 'index.do';//进入后台首页  
                 }else{  
                    layer.msg('登录失败!用户名或密码错误！',{icon:2,time:1500});
