@@ -4,22 +4,32 @@
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
 		<dl id="menu-article">
-			<dt><i class="Hui-iconfont">&#xe616;</i> 新闻管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
+			<dt><a style="text-decoration:none;" href="${pageContext.request.contextPath}/news/list.html" title="新闻管理"><i class="Hui-iconfont">&#xe616;</i> 新闻管理</a></dt>
+			<%-- <dd>
 				<ul>
 					<li><a href="${pageContext.request.contextPath}/news/list.html" title="新闻管理">新闻列表</a></li>
 		</ul>
-	</dd>
-</dl>
+	</dd> --%>
+		</dl>
 		<dl id="menu-picture">
-			<dt><i class="Hui-iconfont">&#xe613;</i> 案例管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
+			<dt><a  style="text-decoration:none;"  href="${pageContext.request.contextPath}/case/list.html" title="案例管理"><i class="Hui-iconfont">&#xe613;</i> 案例管理</a></dt>
+			<!-- <dd>
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/case/list.html" title="案例管理">案例列表</a></li>
+					<li>案例列表</a></li>
 		</ul>
-	</dd>
+	</dd> -->
+		</dl>
+		
+		<dl id="menu-comments">
+			<dt><a style="text-decoration:none;" href="${pageContext.request.contextPath}/note/note_list.html" title="留言列表"><i class="Hui-iconfont">&#xe622;</i> 留言管理</a></dt>
+			<%-- <dd>
+				<ul>
+					<li><a href="${pageContext.request.contextPath}/note/note_list.html" title="留言列表">留言列表</a></li>
+					
+		</ul>
+	</dd> --%>
 </dl>
-		<dl id="menu-product">
+<dl id="menu-product">
 			<dt><i class="Hui-iconfont">&#xe620;</i> 附件管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
@@ -27,15 +37,6 @@
 					<li><a href="${pageContext.request.contextPath}/affix/recycle_list.html" title="回收站">回收站</a></li>
 					
 				</ul>
-	</dd>
-</dl>
-		<dl id="menu-comments">
-			<dt><i class="Hui-iconfont">&#xe622;</i> 留言管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a href="${pageContext.request.contextPath}/note/note_list.html" title="留言列表">留言列表</a></li>
-					
-		</ul>
 	</dd>
 </dl>
  <dl id="menu-system" >
@@ -49,13 +50,13 @@
 	</dd>
 </dl>
 		
-		<dl id="menu-admin" style="display: none">
+<dl id="menu-admin" >
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
 					<li><a href="admin-role.html" title="角色管理">角色管理</a></li>
 					<li><a href="admin-permission.html" title="权限管理">权限管理</a></li>
-					<li><a href="admin-list.html" title="管理员列表">管理员列表</a></li>
+					<li><a href="admin-list.html" title="人员列表">人员列表</a></li>
 		</ul>
 	</dd>
 </dl>
