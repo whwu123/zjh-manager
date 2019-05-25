@@ -136,7 +136,7 @@ public class NewsController extends BaseController {
 			affixModel.setDescrption("新闻附件");
 			int id = affixService.insertAffixBackId(affixModel);
 			if(id>0){
-				System.out.println("新的文件ID："+affixModel.getId());
+				//System.out.println("新的文件ID："+affixModel.getId());
 				news.setAffixid(affixModel.getId());
 			}
 			
@@ -178,7 +178,7 @@ public class NewsController extends BaseController {
 		        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
 		        news.setStaticpage(newsStaticPage);
 		        if(newsService.update(news)>0){
-		        	System.out.println("生成新闻静态页成功："+newsStaticPage);
+		        	//System.out.println("生成新闻静态页成功："+newsStaticPage);
 		        }
 		    } catch (Exception e) {
 		        e.printStackTrace();

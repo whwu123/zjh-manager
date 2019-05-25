@@ -102,7 +102,7 @@ public class AffixController extends BaseController {
         	//上传到本地
 			affix.transferTo(myFile);
 		}
-		System.out.println("affixName:"+affixName);
+		//System.out.println("affixName:"+affixName);
 		affixModel.setAffixname(affixName);
 		affixModel.setAffixtime(new Date());
 		affixModel.setAffixtype(affixType);
