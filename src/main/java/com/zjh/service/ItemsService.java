@@ -20,8 +20,9 @@ public interface ItemsService {
 	
 	Items selectItemsByFid(String fId,Integer fStatus);
 	
-	Items selectItemsByKey(String fKey,Integer fStatus);
+	Items selectItemsByKey(String fKey);
 	
 	List<Items> getItemsByFpid(String fPid,Integer fStatus);
-	
+	//取得友链前7个
+		List<Items> getitemsYL();
 }

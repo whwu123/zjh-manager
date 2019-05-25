@@ -10,7 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>这个.. 页面没有找到！！！_SJ5D.COM</title>
 		<link href="<%=basePath %>static/404.css" rel="stylesheet" type="text/css" />
-		
+		<link rel="Bookmark" href="favicon.ico" >
+		<link rel="Shortcut Icon" href="favicon.ico" />
 	</head>
 	<body>
 		<div id="mother">

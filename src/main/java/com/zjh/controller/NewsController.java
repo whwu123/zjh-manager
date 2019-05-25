@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -30,8 +31,10 @@ import com.zjh.newsutil.EntityUtils;
 import com.zjh.newsutil.FileStreamHelp;
 import com.zjh.newsutil.NewsSelUtil;
 import com.zjh.pojo.Affix;
+import com.zjh.pojo.Items;
 import com.zjh.pojo.News;
 import com.zjh.service.AffixService;
+import com.zjh.service.ItemsService;
 import com.zjh.service.NewsService;
 
 @Controller
@@ -42,7 +45,8 @@ public class NewsController extends BaseController {
 	private NewsService newsService;
 	@Autowired
 	private AffixService affixService;
-	
+	@Autowired
+	private ItemsService itemsService;
 
 	@RequestMapping(value = "/list")
 	public String list(Model model, String keyWord, Integer type, String startTime, String endTime, Integer page) throws Exception {
@@ -67,7 +71,7 @@ public class NewsController extends BaseController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public void add(HttpServletRequest request,String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile, @RequestParam("affixFile") MultipartFile affixFile,PrintWriter out) throws Exception {
+	public void add(HttpServletRequest request,String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile,PrintWriter out) throws Exception {
 		// 新增方法
 		News news = new News();
 		news.setTitle(title);
@@ -111,37 +115,29 @@ public class NewsController extends BaseController {
         	news.setImg("/images/mr1.png" );
         	news.setSmallimg("/images/mr1.png");
 		}
-		if(!affixFile.isEmpty()){
-			Affix affixModel = new Affix();
-			 //获得项目的路径  
-	        ServletContext sc = request.getSession().getServletContext();  
-	        // 设定文件保存的目录  
-	        String path = sc.getRealPath("/upload/affix/news/");
-	        
-			String affixType = affixFile.getOriginalFilename().substring(affixFile.getOriginalFilename().lastIndexOf(".")+1);
-			long affixSize = affixFile.getSize();
-		//	byte[] affixContent= affixFile.getBytes();
-			String affixName = affixFile.getOriginalFilename().substring(0,affixFile.getOriginalFilename().lastIndexOf("."));
-			String uid = UUID.randomUUID().toString().replace("-", "");
-			String savePath = path+"/"+uid+affixName+"."+affixType;
-			File myFile = new File(savePath);
-        	//上传到本地
-			affixFile.transferTo(myFile);
-			affixModel.setAffixname(affixName);
-			affixModel.setAffixtime(new Date());
-			affixModel.setAffixtype(affixType);
-			//affixModel.setContent(affixContent);
-			affixModel.setStatus(0);
-			affixModel.setSize(affixSize);
-			affixModel.setAffixpath(savePath);
-			affixModel.setDescrption("新闻附件");
-			int id = affixService.insertAffixBackId(affixModel);
-			if(id>0){
-				logger.info("新的文件ID："+affixModel.getId());
-				news.setAffixid(affixModel.getId());
-			}
-			
-		}
+		/*
+		 * if(!affixFile.isEmpty()){ Affix affixModel = new Affix(); //获得项目的路径
+		 * ServletContext sc = request.getSession().getServletContext(); // 设定文件保存的目录
+		 * String path = sc.getRealPath("/upload/affix/news/"); File file = new
+		 * File(path); if(!file.exists()) { logger.info("文件夹不存在,则新建文件夹"); file.mkdirs();
+		 * } String affixType =
+		 * affixFile.getOriginalFilename().substring(affixFile.getOriginalFilename().
+		 * lastIndexOf(".")+1); long affixSize = affixFile.getSize(); // byte[]
+		 * affixContent= affixFile.getBytes(); String affixName =
+		 * affixFile.getOriginalFilename().substring(0,affixFile.getOriginalFilename().
+		 * lastIndexOf(".")); String uid = UUID.randomUUID().toString().replace("-",
+		 * ""); String savePath = path+"/"+uid+affixName+"."+affixType; File myFile =
+		 * new File(savePath); //上传到本地 affixFile.transferTo(myFile);
+		 * affixModel.setAffixname(affixName); affixModel.setAffixtime(new Date());
+		 * affixModel.setAffixtype(affixType); //affixModel.setContent(affixContent);
+		 * affixModel.setStatus(0); affixModel.setSize(affixSize);
+		 * affixModel.setAffixpath(savePath); affixModel.setDescrption("新闻附件"); int id =
+		 * affixService.insertAffixBackId(affixModel); if(id>0){
+		 * logger.info("新的文件ID："+affixModel.getId());
+		 * news.setAffixid(affixModel.getId()); }
+		 * 
+		 * }
+		 */
 		
 		if (newsService.add(news) > 0) {
 			String newsStaticPage =String.valueOf(System.currentTimeMillis())+".html";
@@ -164,6 +160,30 @@ public class NewsController extends BaseController {
 		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
 		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
 		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+		        Items items = itemsService.selectItemsByKey("company_address");
+		        htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
+		        items = itemsService.selectItemsByKey("phone");
+		        htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_email");
+		        htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
+		        items = itemsService.selectItemsByKey("postcode");
+		        htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_person");
+		        htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_tel");
+		        htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
+		        items = itemsService.selectItemsByKey("phone2");
+		        htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_qq");
+		        htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
+		        //友情链接
+		    	List<Items> getItemsYL = itemsService.getitemsYL();
+		    	String html = "";
+		    	for (int i = 0; i < getItemsYL.size(); i++) {
+					html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
+				}
+		    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
+		        
 		        News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
 		        if(newsPrev!=null){
 		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
@@ -185,7 +205,6 @@ public class NewsController extends BaseController {
 		        e.printStackTrace();
 		    }
 		    EntityUtils.close();
-			
 			out.print(StatusConstant.SUCCESS);
 		} else {
 			out.print(StatusConstant.FAIL);
@@ -234,12 +253,84 @@ public class NewsController extends BaseController {
             	news.setImg("/images/zjh/cover/" + fileName);
             	news.setSmallimg("/images/zjh/cover/small/"+fileName);
 				
+            	
+            	
 			} catch (IOException e) {
 				logger.error("upload img fail.", e);
 			} 
 		}
 		
 		if (newsService.update(news) > 0) {
+			String newsStaticPage =String.valueOf(System.currentTimeMillis())+".html";
+			Connection connection = EntityUtils.getConnection();
+			//生成新闻静态页
+			String Modelpath = BaseController.NEWS_STATIC_PAGR_TEMPLATE; //模板文件地址
+		    String OutHTMLpath = BaseController.NEWS_STATIC_PAGR;//生成静态页文件地址
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    try {
+		        FileStreamHelp fsh = new FileStreamHelp();//实例化文件操作辅助类
+		        String htmlcode = fsh.ReadFile(Modelpath);//读取模板文件
+		        htmlcode=htmlcode.replaceAll("###htmltitle###",news.getTitle());
+		        if(news.getDescription().length()>30){
+		        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription().substring(0, 30));
+		        }else{
+		        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription());
+		        }
+		        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+		        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+		        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+		        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+		        Items items = itemsService.selectItemsByKey("company_address");
+		        htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
+		        items = itemsService.selectItemsByKey("phone");
+		        htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_email");
+		        htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
+		        items = itemsService.selectItemsByKey("postcode");
+		        htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_person");
+		        htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_tel");
+		        htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
+		        items = itemsService.selectItemsByKey("phone2");
+		        htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
+		        items = itemsService.selectItemsByKey("company_qq");
+		        htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
+		        //友情链接
+		    	List<Items> getItemsYL = itemsService.getitemsYL();
+		    	String html = "";
+		    	for (int i = 0; i < getItemsYL.size(); i++) {
+					html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
+				}
+		    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
+		    	
+		        News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
+		        if(newsPrev!=null){
+		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
+		        }else{
+		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
+		        }
+		        News newsNex = NewsSelUtil.getNewsPrev(connection);
+		        if(newsNex!=null){
+		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
+		        }else{
+		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
+		        }
+		        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
+		        news.setStaticpage(newsStaticPage);
+		        if(newsService.update(news)>0){
+		        	logger.info("生成新闻静态页成功："+newsStaticPage);
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    EntityUtils.close();
 			out.print(StatusConstant.SUCCESS);
 		} else {
 			out.print(StatusConstant.FAIL);

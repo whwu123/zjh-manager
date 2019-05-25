@@ -24,7 +24,10 @@ public interface ItemsMapper {
 	
 	Items selectItemsByFid(@Param("fId")String fId,@Param("fStatus")Integer fStatus);
 	
-	Items selectItemsByKey(@Param("fKey")String fKey,@Param("fStatus")Integer fStatus);
+	Items selectItemsByKey(@Param("fKey")String fKey);
 	
 	List<Items> getItemsByFpid(@Param("fPid")String fPid,@Param("fStatus")Integer fStatus);
+	
+	//取得友链前7个
+	List<Items> getitemsYL();
 }

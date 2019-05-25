@@ -227,9 +227,6 @@
 	
 	<select id="selectItemsByKey" resultMap="BaseResultMap">
 		select * from items where f_key  = #{fKey,jdbcType=VARCHAR}
-         <if test="fStatus != null" >
-          and f_status  = #{fStatus,jdbcType=INTEGER}
-        </if>
 	</select>
 	<select id="selectItemsByFid" resultMap="BaseResultMap">
   		select * from items where f_id = #{fId,jdbcType=VARCHAR}
@@ -245,5 +242,8 @@
          <if test="fStatus != null" >
           and f_status  = #{fStatus,jdbcType=INTEGER}
         </if>
+	</select>
+	<select id="getitemsYL" resultMap="BaseResultMap">
+		SELECT * FROM items where f_type = 1 and f_status = 1
 	</select>
 </mapper>

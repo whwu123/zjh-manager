@@ -15,6 +15,8 @@
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
 <![endif]-->
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="favicon.ico" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/h-ui.admin/css/H-ui.admin.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/lib/Hui-iconfont/1.0.8/iconfont.css" />

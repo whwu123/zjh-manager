@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="util/meta.jsp"></jsp:include>
 <title>后台管理</title>
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="favicon.ico" />
 </head>
 <body>
 <jsp:include page="util/header.jsp"></jsp:include>

@@ -84,11 +84,13 @@ public class ItemsServiceImpl implements ItemsService {
 	}
 
 	@Override
-	public Items selectItemsByKey(String fKey, Integer fStatus) {
-		if(fStatus==null) {
-			fStatus = 1;
-		}
-		return itemsMapper.selectItemsByKey(fKey, fStatus);
+	public Items selectItemsByKey(String fKey) {
+		return itemsMapper.selectItemsByKey(fKey);
+	}
+
+	@Override
+	public List<Items> getitemsYL() {
+		return itemsMapper.getitemsYL();
 	}
 
 }

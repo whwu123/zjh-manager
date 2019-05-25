@@ -16,6 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="lib/html5.js"></script>
 <script type="text/javascript" src="lib/respond.min.js"></script>
 <![endif]-->
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="favicon.ico" />
 <link href="static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
 <link href="static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />

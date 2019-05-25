@@ -53,14 +53,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="row cl">
+		<!-- <div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">新闻附件：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<div class="uploader-thum-container">
-					<input type="file" id="start-upload" name="affixFile" >
+					<input type="file" id="start-upload2" name="affixFile" >
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">新闻内容：</label>
 			<div class="formControls col-xs-8 col-sm-9"> 
@@ -70,7 +70,7 @@
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i>&nbsp;&nbsp;保存&nbsp;&nbsp;</button>
+				<button id="submitbtn" onClick="article_save_submit();" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i>&nbsp;&nbsp;保存&nbsp;&nbsp;</button>
 				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
@@ -123,12 +123,19 @@ function article_save_submit(){
             processData : false,// 告诉jQuery不要去处理发送的数据  
             success:function(data){
             	if (data == "success") {
-                    parent.window.location.href='${pageContext.request.contextPath}/news/list.html';
-                    removeIframe();
+                   parent.window.location.href='${pageContext.request.contextPath}/news/list.html';
+                   removeIframe();
                 } else {
                 	layer.msg('保存失败!', {icon:1,time:3000});
                 }
-            }
+            },
+		 	complete: function () {//完成响应
+		        $("#submitbtn").removeAttr("disabled");
+		    },
+		    beforeSend: function () {
+		        // 禁用按钮防止重复提交，发送前响应
+		    	$("#submitbtn").attr({ disabled: "disabled" });
+		    }
 		})
 	}
 }

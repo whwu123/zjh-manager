@@ -120,7 +120,7 @@
 		
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="affix_save_submit();" id="btns" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 上传附件</button>
+				<button id="submitbtn" onClick="affix_save_submit();" id="btns" class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 上传附件</button>
 				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
@@ -161,6 +161,11 @@ function affix_save_submit(){
 		             processData : false,// 告诉jQuery不要去处理发送的数据  
 		             beforeSend: function () {
 				       	modaldemo();
+				     // 禁用按钮防止重复提交，发送前响应
+				    	$("#submitbtn").attr({ disabled: "disabled" });
+				     },
+				     complete: function () {//完成响应
+					        $("#submitbtn").removeAttr("disabled");
 				     },
 		             success:function(data){
 		                    if(data=="ok"){
