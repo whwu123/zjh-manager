@@ -50,7 +50,7 @@
 	</dd>
 </dl>
 		
-<dl id="menu-admin" >
+<!-- <dl id="menu-admin" >
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
@@ -59,7 +59,7 @@
 					<li><a href="admin-list.html" title="人员列表">人员列表</a></li>
 		</ul>
 	</dd>
-</dl>
+</dl> -->
 		
  <dl id="menu-system"  style="display: none">
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
