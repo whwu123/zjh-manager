@@ -14,6 +14,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,11 +28,12 @@ import com.zjh.base.PageView;
 import com.zjh.common.constant.StatusConstant;
 import com.zjh.pojo.Affix;
 import com.zjh.service.AffixService;
+import com.zjh.util.ThumbnailsTest;
 
 @Controller
 @RequestMapping("/affix")
 public class AffixController extends BaseController {
-
+	private static Logger logger = Logger.getLogger(AffixController.class); 
 	@Autowired
 	private AffixService affixService;
 
@@ -88,6 +90,11 @@ public class AffixController extends BaseController {
         ServletContext sc = request.getSession().getServletContext();  
         // 设定文件保存的目录  
         String path = sc.getRealPath("/upload/affix/");
+        File file = new File(path);
+        if(!file.exists()) {
+        	logger.info("文件夹不存在,则新建文件夹");
+        	file.mkdirs();
+        }
 		long affixSize =0;
 		//byte[] affixContent = null;
 		String affixType = null;
