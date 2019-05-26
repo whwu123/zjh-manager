@@ -7,14 +7,9 @@ import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
 import net.coobird.thumbnailator.Thumbnails;
-
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,16 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.zjh.base.BaseController;
 import com.zjh.common.constant.StatusConstant;
 import com.zjh.newsutil.EntityUtils;
 import com.zjh.newsutil.FileStreamHelp;
 import com.zjh.newsutil.NewsSelUtil;
-import com.zjh.pojo.Affix;
 import com.zjh.pojo.Items;
 import com.zjh.pojo.News;
-import com.zjh.service.AffixService;
 import com.zjh.service.ItemsService;
 import com.zjh.service.NewsService;
 
@@ -43,8 +35,8 @@ public class NewsController extends BaseController {
 	private static Logger logger = Logger.getLogger(NewsController.class); 
 	@Autowired
 	private NewsService newsService;
-	@Autowired
-	private AffixService affixService;
+	//@Autowired
+//	private AffixService affixService;
 	@Autowired
 	private ItemsService itemsService;
 
