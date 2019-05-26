@@ -69,9 +69,9 @@ public class NewsController extends BaseController {
 		return "news/select";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add")
 	@ResponseBody
-	public void add(HttpServletRequest request,String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile,PrintWriter out) throws Exception {
+	public String add(HttpServletRequest request,String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile) throws Exception {
 		// 新增方法
 		News news = new News();
 		news.setTitle(title);
@@ -185,13 +185,13 @@ public class NewsController extends BaseController {
 		    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
 		        
 		        News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
-		        if(newsPrev!=null){
+		        if(newsPrev.getStaticpage()!=null){
 		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
 		        }else{
 		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
 		        }
 		        News newsNex = NewsSelUtil.getNewsPrev(connection);
-		        if(newsNex!=null){
+		        if(newsNex.getStaticpage()!=null){
 		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
 		        }else{
 		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
@@ -205,17 +205,18 @@ public class NewsController extends BaseController {
 		        e.printStackTrace();
 		    }
 		    EntityUtils.close();
-			out.print(StatusConstant.SUCCESS);
+			//out.print(StatusConstant.SUCCESS);
+		    return StatusConstant.SUCCESS;
 		} else {
-			out.print(StatusConstant.FAIL);
+			return StatusConstant.FAIL;
 		}
-		out.flush();
-		out.close();
+		//out.flush();
+		//out.close();
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update")
 	@ResponseBody
-	public void update(HttpServletRequest request,Integer id, String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile, PrintWriter out) {
+	public String update(HttpServletRequest request,Integer id, String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile) {
 		// 更新方法
 		News news = newsService.getById(id);
 		news.setTitle(title);
@@ -311,13 +312,13 @@ public class NewsController extends BaseController {
 		    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
 		    	
 		        News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
-		        if(newsPrev!=null){
+		        if(newsPrev.getStaticpage()!=null){
 		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
 		        }else{
 		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
 		        }
 		        News newsNex = NewsSelUtil.getNewsPrev(connection);
-		        if(newsNex!=null){
+		        if(newsNex.getStaticpage()!=null){
 		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
 		        }else{
 		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
@@ -331,12 +332,10 @@ public class NewsController extends BaseController {
 		        e.printStackTrace();
 		    }
 		    EntityUtils.close();
-			out.print(StatusConstant.SUCCESS);
+		    return StatusConstant.SUCCESS;
 		} else {
-			out.print(StatusConstant.FAIL);
+			return StatusConstant.FAIL;
 		}
-		out.flush();
-		out.close();
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
