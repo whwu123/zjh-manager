@@ -33,4 +33,17 @@ public interface NewsMapper {
     int updateByPrimaryKeyWithBLOBs(News record);
 
     int updateByPrimaryKey(News record);
+    
+    /**
+	 * 取得上一篇
+	 * @param newsId
+	 * @return
+	 */
+	News getNewsPrev(@Param("newsId")Integer newsId);
+	/**
+	 * 取得第二篇
+	 * @param newsId
+	 * @return
+	 */
+	News getNewsNext();
 }
