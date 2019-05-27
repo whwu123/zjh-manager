@@ -1,5 +1,7 @@
 package com.zjh.service;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.github.pagehelper.PageInfo;
 import com.zjh.pojo.News;
 
@@ -18,12 +20,12 @@ public interface NewsService {
 	 * @param newsId
 	 * @return
 	 */
-	News getNewsPrev(Integer newsId);
+	News getNewsPrev(Integer newsId,Integer type);
 	/**
 	 * 取得第二篇
 	 * @param newsId
 	 * @return
 	 */
-	News getNewsNext();
+	News getNewsNext(Integer type);
 	
 }

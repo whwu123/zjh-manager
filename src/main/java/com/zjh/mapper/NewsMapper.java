@@ -39,11 +39,11 @@ public interface NewsMapper {
 	 * @param newsId
 	 * @return
 	 */
-	News getNewsPrev(@Param("newsId")Integer newsId);
+	News getNewsPrev(@Param("newsId")Integer newsId,@Param("type")Integer type);
 	/**
 	 * 取得第二篇
 	 * @param newsId
 	 * @return
 	 */
-	News getNewsNext();
+	News getNewsNext(@Param("type")Integer type);
 }

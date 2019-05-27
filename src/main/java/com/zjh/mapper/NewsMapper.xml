@@ -379,11 +379,11 @@
  <select id="getNewsPrev" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
   	 select 
   	 <include refid="Base_Column_List" />
-  	 from news where id <![CDATA[ <  ]]> #{newsId,jdbcType=INTEGER} and status =0 order by id desc limit 0,1
+  	 from news where id <![CDATA[ <  ]]> #{newsId,jdbcType=INTEGER} and status =0 and type = #{type,jdbcType=INTEGER}  order by id desc limit 0,1
   </select> 
   <select id="getNewsNext" resultMap="BaseResultMap" >
    	select 
    	<include refid="Base_Column_List" />
-    from news where status =0 order by id desc limit 2,1 
+    from news where status =0 and type = #{type,jdbcType=INTEGER}  order by id desc limit 2,1 
   </select>
 </mapper>

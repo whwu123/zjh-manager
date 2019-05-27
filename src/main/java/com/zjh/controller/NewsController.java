@@ -23,7 +23,6 @@ import com.zjh.base.BaseController;
 import com.zjh.common.constant.StatusConstant;
 import com.zjh.newsutil.EntityUtils;
 import com.zjh.newsutil.FileStreamHelp;
-import com.zjh.newsutil.NewsSelUtil;
 import com.zjh.pojo.Items;
 import com.zjh.pojo.News;
 import com.zjh.service.ItemsService;
@@ -135,87 +134,170 @@ public class NewsController extends BaseController {
 			String newsStaticPage =String.valueOf(System.currentTimeMillis())+".html";
 			//Connection connection = EntityUtils.getConnection();
 			//生成新闻静态页
-			String Modelpath = BaseController.NEWS_STATIC_PAGR_TEMPLATE; //模板文件地址
+			String Modelpath = BaseController.NEWS_STATIC_PAGR_TEMPLATE; //行业新闻模板文件地址
 		    String OutHTMLpath = BaseController.NEWS_STATIC_PAGR;//生成静态页文件地址
+		    String HyModelpath = BaseController.HY_NEWS_STATIC_PAGR_TEMPLATE; //行业新闻模板文件地址
 		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		    try {
-		        FileStreamHelp fsh = new FileStreamHelp();//实例化文件操作辅助类
-		        String htmlcode = fsh.ReadFile(Modelpath);//读取模板文件
-		        htmlcode=htmlcode.replaceAll("###htmltitle###",news.getTitle());
-		        if(news.getDescription().length()>30){
-		        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription().substring(0, 30));
-		        }else{
-		        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription());
-		        }
-		        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
-		        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
-		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
-		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
-		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
-		        Items items = itemsService.selectItemsByKey("company_address");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
-		        }
-		        items = itemsService.selectItemsByKey("phone");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
-		        }
-		        items = itemsService.selectItemsByKey("company_email");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
-		        }
-		        items = itemsService.selectItemsByKey("postcode");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
-		        }
-		        items = itemsService.selectItemsByKey("company_person");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
-		        }
-		        items = itemsService.selectItemsByKey("company_tel");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
-		        }
-		        items = itemsService.selectItemsByKey("phone2");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
-		        }
-		        items = itemsService.selectItemsByKey("company_qq");
-		        if(items!=null) {
-		        	htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
-		        }
-		        //友情链接
-		    	List<Items> getItemsYL = itemsService.getitemsYL();
-		    	if(getItemsYL.size()>0) {
-		    		String html = "";
-			    	for (int i = 0; i < getItemsYL.size(); i++) {
-						html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
-					}
-			    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
-		    	}
-		        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
-		    	News newsPrev = newsService.getNewsPrev(news.getId());
-		        if(newsPrev!=null){
-		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
-		        }else{
-		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
-		        }
-		        //News newsNex = NewsSelUtil.getNewsPrev(connection);
-		        News newsNex = newsService.getNewsNext();
-		        if(newsNex!=null){
-		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
-		        }else{
-		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
-		        }
-		        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
-		        news.setStaticpage(newsStaticPage);
-		        if(newsService.update(news)>0){
-		        	logger.info("生成新闻静态页成功："+newsStaticPage);
-		        }
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        return StatusConstant.FAIL;
+		    if(news.getType() ==1) {
+		    	try {
+			        FileStreamHelp fsh = new FileStreamHelp();//实例化文件操作辅助类
+			        String htmlcode = fsh.ReadFile(Modelpath);//读取模板文件
+			        htmlcode=htmlcode.replaceAll("###htmltitle###",news.getTitle());
+			        if(news.getDescription().length()>30){
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription().substring(0, 30));
+			        }else{
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription());
+			        }
+			        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+			        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+			        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+			        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+			        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+			        Items items = itemsService.selectItemsByKey("company_address");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_email");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("postcode");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_person");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_tel");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone2");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_qq");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
+			        }
+			        //友情链接
+			    	List<Items> getItemsYL = itemsService.getitemsYL();
+			    	if(getItemsYL.size()>0) {
+			    		String html = "";
+				    	for (int i = 0; i < getItemsYL.size(); i++) {
+							html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
+						}
+				    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
+			    	}
+			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
+			    	News newsPrev = newsService.getNewsPrev(news.getId(),1);
+			        if(newsPrev!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
+			        }
+			        //News newsNex = NewsSelUtil.getNewsPrev(connection);
+			        News newsNex = newsService.getNewsNext(1);
+			        if(newsNex!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
+			        }
+			        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
+			        news.setStaticpage(newsStaticPage);
+			        if(newsService.update(news)>0){
+			        	logger.info("生成公司新闻静态页成功："+newsStaticPage);
+			        }
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			        return StatusConstant.FAIL;
+			    }
+		    }else if(news.getType() == 2) {
+		    	try {
+			        FileStreamHelp fsh = new FileStreamHelp();//实例化文件操作辅助类
+			        String htmlcode = fsh.ReadFile(HyModelpath);//读取模板文件
+			        htmlcode=htmlcode.replaceAll("###htmltitle###",news.getTitle());
+			        if(news.getDescription().length()>30){
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription().substring(0, 30));
+			        }else{
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription());
+			        }
+			        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+			        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+			        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+			        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+			        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+			        Items items = itemsService.selectItemsByKey("company_address");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_email");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("postcode");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_person");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_tel");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone2");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_qq");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
+			        }
+			        //友情链接
+			    	List<Items> getItemsYL = itemsService.getitemsYL();
+			    	if(getItemsYL.size()>0) {
+			    		String html = "";
+				    	for (int i = 0; i < getItemsYL.size(); i++) {
+							html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
+						}
+				    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
+			    	}
+			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
+			    	News newsPrev = newsService.getNewsPrev(news.getId(),2);
+			        if(newsPrev!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
+			        }
+			        //News newsNex = NewsSelUtil.getNewsPrev(connection);
+			        News newsNex = newsService.getNewsNext(2);
+			        if(newsNex!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
+			        }
+			        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
+			        news.setStaticpage(newsStaticPage);
+			        if(newsService.update(news)>0){
+			        	logger.info("生成行业新闻静态页成功："+newsStaticPage);
+			        }
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			        return StatusConstant.FAIL;
+			    }
 		    }
+		    
 		    //EntityUtils.close();
 			//out.print(StatusConstant.SUCCESS);
 		    return StatusConstant.SUCCESS;
@@ -275,77 +357,176 @@ public class NewsController extends BaseController {
 		
 		if (newsService.update(news) > 0) {
 			String newsStaticPage =String.valueOf(System.currentTimeMillis())+".html";
-			Connection connection = EntityUtils.getConnection();
 			//生成新闻静态页
 			String Modelpath = BaseController.NEWS_STATIC_PAGR_TEMPLATE; //模板文件地址
 		    String OutHTMLpath = BaseController.NEWS_STATIC_PAGR;//生成静态页文件地址
+		    String HyModelpath = BaseController.HY_NEWS_STATIC_PAGR_TEMPLATE; //行业新闻模板文件地址
 		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		    try {
-		        FileStreamHelp fsh = new FileStreamHelp();//实例化文件操作辅助类
-		        String htmlcode = fsh.ReadFile(Modelpath);//读取模板文件
-		        htmlcode=htmlcode.replaceAll("###htmltitle###",news.getTitle());
-		        if(news.getDescription().length()>30){
-		        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription().substring(0, 30));
-		        }else{
-		        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription());
-		        }
-		        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
-		        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
-		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
-		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
-		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
-		        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
-		        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
-		        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
-		        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
-		        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
-		        Items items = itemsService.selectItemsByKey("company_address");
-		        htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
-		        items = itemsService.selectItemsByKey("phone");
-		        htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
-		        items = itemsService.selectItemsByKey("company_email");
-		        htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
-		        items = itemsService.selectItemsByKey("postcode");
-		        htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
-		        items = itemsService.selectItemsByKey("company_person");
-		        htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
-		        items = itemsService.selectItemsByKey("company_tel");
-		        htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
-		        items = itemsService.selectItemsByKey("phone2");
-		        htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
-		        items = itemsService.selectItemsByKey("company_qq");
-		        htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
-		        //友情链接
-		    	List<Items> getItemsYL = itemsService.getitemsYL();
-		    	String html = "";
-		    	for (int i = 0; i < getItemsYL.size(); i++) {
-					html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
-				}
-		    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
-		    	
-		        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
-		        News newsPrev = newsService.getById(news.getId());
-		        if(newsPrev.getStaticpage()!=null){
-		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
-		        }else{
-		        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
-		        }
-		        //News newsNex = NewsSelUtil.getNewsNext(connection);
-		        News newsNex = newsService.getNewsNext();
-		        if(newsNex.getStaticpage()!=null){
-		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
-		        }else{
-		        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
-		        }
-		        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
-		        news.setStaticpage(newsStaticPage);
-		        if(newsService.update(news)>0){
-		        	logger.info("生成新闻静态页成功："+newsStaticPage);
-		        }
-		    } catch (Exception e) {
-		        e.printStackTrace();
+		    if(news.getType() == 1 ) {
+		    	try {
+			        FileStreamHelp fsh = new FileStreamHelp();//实例化文件操作辅助类
+			        String htmlcode = fsh.ReadFile(Modelpath);//读取模板文件
+			        htmlcode=htmlcode.replaceAll("###htmltitle###",news.getTitle());
+			        if(news.getDescription().length()>30){
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription().substring(0, 30));
+			        }else{
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription());
+			        }
+			        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+			        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+			        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+			        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+			        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+			        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+			        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+			        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+			        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+			        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+			        Items items = itemsService.selectItemsByKey("company_address");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_email");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("postcode");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_person");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_tel");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone2");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_qq");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
+			        }
+			        //友情链接
+			    	List<Items> getItemsYL = itemsService.getitemsYL();
+			    	String html = "";
+			    	for (int i = 0; i < getItemsYL.size(); i++) {
+						html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
+					}
+			    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
+			    	
+			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
+			        News newsPrev = newsService.getNewsPrev(news.getId(), 1);
+			        if(newsPrev.getStaticpage()!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
+			        }
+			        //News newsNex = NewsSelUtil.getNewsNext(connection);
+			        News newsNex = newsService.getNewsNext(1);
+			        if(newsNex.getStaticpage()!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
+			        }
+			        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
+			        news.setStaticpage(newsStaticPage);
+			        if(newsService.update(news)>0){
+			        	logger.info("生成新闻静态页成功："+newsStaticPage);
+			        }
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			    }
+		    }else if(news.getType() == 2) {
+		    	try {
+			        FileStreamHelp fsh = new FileStreamHelp();//实例化文件操作辅助类
+			        String htmlcode = fsh.ReadFile(HyModelpath);//读取模板文件
+			        htmlcode=htmlcode.replaceAll("###htmltitle###",news.getTitle());
+			        if(news.getDescription().length()>30){
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription().substring(0, 30));
+			        }else{
+			        	htmlcode=htmlcode.replaceAll("###htmlcontent###", news.getDescription());
+			        }
+			        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+			        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+			        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+			        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+			        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+			        htmlcode=htmlcode.replaceAll("###newtitle###", news.getTitle());
+			        htmlcode=htmlcode.replaceAll("###newsauthor###", news.getAuthor());
+			        htmlcode=htmlcode.replaceAll("###newsources###", news.getSources());
+			        htmlcode=htmlcode.replaceAll("###newstime###", sdf.format(news.getCreatetime()));
+			        htmlcode=htmlcode.replaceAll("###newscontent###", news.getContent());
+			        Items items = itemsService.selectItemsByKey("company_address");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###address###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_email");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_email###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("postcode");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###postcode###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_person");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_person###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_tel");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_tel###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("phone2");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###phone2###",items.getfContent());
+			        }
+			        items = itemsService.selectItemsByKey("company_qq");
+			        if(items!=null) {
+			        	htmlcode=htmlcode.replaceAll("###company_qq###",items.getfContent());
+			        }
+			        //友情链接
+			    	List<Items> getItemsYL = itemsService.getitemsYL();
+			    	String html = "";
+			    	for (int i = 0; i < getItemsYL.size(); i++) {
+						html += "<p><a href=\""+getItemsYL.get(i).getfUrl()+"\">"+getItemsYL.get(i).getfTitle()+"</a></p>";
+					}
+			    	htmlcode=htmlcode.replaceAll("###itemsYL###",html);
+			    	
+			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
+			        News newsPrev = newsService.getNewsPrev(news.getId(), 2);
+			        if(newsPrev.getStaticpage()!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
+			        }
+			        //News newsNex = NewsSelUtil.getNewsNext(connection);
+			        News newsNex = newsService.getNewsNext(2);
+			        if(newsNex.getStaticpage()!=null){
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
+			        }else{
+			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
+			        }
+			        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
+			        news.setStaticpage(newsStaticPage);
+			        if(newsService.update(news)>0){
+			        	logger.info("生成新闻静态页成功："+newsStaticPage);
+			        }
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			    }
 		    }
-		    EntityUtils.close();
 		    return StatusConstant.SUCCESS;
 		} else {
 			return StatusConstant.FAIL;
