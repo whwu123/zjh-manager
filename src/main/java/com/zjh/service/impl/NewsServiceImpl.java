@@ -58,4 +58,14 @@ public class NewsServiceImpl implements NewsService {
 		return newsMapper.updateByPrimaryKeyWithBLOBs(mapper);
 	}
 
+	@Override
+	public News getNewsPrev(Integer newsId) {
+		return newsMapper.getNewsPrev(newsId);
+	}
+
+	@Override
+	public News getNewsNext() {
+		return newsMapper.getNewsNext();
+	}
+
 }

@@ -13,5 +13,17 @@ public interface NewsService {
 	int add(News mapper);
 	/*更新*/
 	int update(News mapper);
+	/**
+	 * 取得上一篇
+	 * @param newsId
+	 * @return
+	 */
+	News getNewsPrev(Integer newsId);
+	/**
+	 * 取得第二篇
+	 * @param newsId
+	 * @return
+	 */
+	News getNewsNext();
 	
 }
