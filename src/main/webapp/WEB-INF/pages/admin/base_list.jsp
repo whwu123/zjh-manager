@@ -62,7 +62,7 @@
 							<fmt:formatDate value="${item.fCreatetime  }" pattern="yyyy-MM-dd HH:mm"/>
 						</td>
 						<td>
-							<c:if test="${item.fStatus == 1 }"><a style="text-decoration: none;" onclick="chageStatus('${item.fId }',0);"><i class="Hui-iconfont">&#xe615;</i>启用</a></c:if>
+							<c:if test="${item.fStatus == 1 }"><a style="text-decoration: none;color: #429842" onclick="chageStatus('${item.fId }',0);"><i class="Hui-iconfont">&#xe615;</i>启用</a></c:if>
 							<c:if test="${item.fStatus == 0 }"><a style="text-decoration: none;" onclick="chageStatus('${item.fId }',1);"><i class="Hui-iconfont">&#xe601;</i>禁用</a></c:if>
 						</td>
 						<td class="td-manage">

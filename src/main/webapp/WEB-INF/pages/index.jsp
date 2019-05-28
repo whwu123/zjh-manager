@@ -92,7 +92,7 @@
 			<dd>
 				<ul>
 					<li><a data-href="${pageContext.request.contextPath}/admin/system-base.html" data-title="友链列表" href="javascript:;">友链列表</a></li>
-					<li><a data-href="${pageContext.request.contextPath}/admin/system-data.html" data-title=">系统配置" href="javascript:;">系统配置</a></li>
+					<li><a data-href="${pageContext.request.contextPath}/admin/system-data.html" data-title="系统配置" href="javascript:;">系统配置</a></li>
 			</ul>
 		</dd>
 	</dl>
