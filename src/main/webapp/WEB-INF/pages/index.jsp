@@ -2,148 +2,234 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="util/meta.jsp"></jsp:include>
 <title>后台管理</title>
-<link rel="Bookmark" href="favicon.ico" >
-<link rel="Shortcut Icon" href="favicon.ico" />
+<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
 </head>
 <body>
-<jsp:include page="util/header.jsp"></jsp:include>
-<jsp:include page="util/menu.jsp"></jsp:include>
-
+<header class="navbar-wrapper">
+	<div class="navbar navbar-fixed-top">
+		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="${pageContext.request.contextPath}/index.do">湖南中楷众拓项目管理咨询有限公司</a>
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.2</span> 
+			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+			<nav class="nav navbar-nav">
+				<ul class="cl">
+					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						
+						<ul class="dropDown-menu menu radius box-shadow">
+								<li><a href="javascript:;" onclick="news_add('添加新闻','${pageContext.request.contextPath}/news/select.html')"><i class="Hui-iconfont">&#xe616;</i> 新闻</a></li>
+								<li><a href="javascript:;" onclick="case_add('添加案例','${pageContext.request.contextPath}/case/select.html')"><i class="Hui-iconfont">&#xe613;</i> 案例</a></li>
+								<li><a href="javascript:;" onclick="affix_add('添加附件','${pageContext.request.contextPath}/affix/add_affix.html')"><i class="Hui-iconfont">&#xe620;</i> 附件</a></li>
+								<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+						</ul>
+				</li>
+			</ul>
+		</nav>
+		<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+			<ul class="cl">
+				<li>超级管理员</li>
+				<li class="dropDown dropDown_hover">
+					<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
+						<li><a href="#">切换账户</a></li>
+						<li><a href="#">退出</a></li>
+				</ul>
+			</li>
+				<!-- <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li> -->
+				<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+					<ul class="dropDown-menu menu radius box-shadow">
+						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+						<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>
+</header>
+<aside class="Hui-aside">
+	<div class="menu_dropdown bk_2">
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 新闻管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="${pageContext.request.contextPath}/news/list.html" data-title="新闻列表" href="javascript:void(0)">新闻列表</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-picture">
+			<dt><i class="Hui-iconfont">&#xe613;</i> 案例管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="${pageContext.request.contextPath}/case/list.html" data-title="案例列表" href="javascript:void(0)">案例列表</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-product">
+			<dt><i class="Hui-iconfont">&#xe622;</i> 留言管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="${pageContext.request.contextPath}/note/note_list.html" data-title="留言列表" href="javascript:void(0)">留言列表</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-comments">
+			<dt><i class="Hui-iconfont">&#xe63e;</i> 附件管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="${pageContext.request.contextPath}/affix/affix_list.html" data-title="附件列表" href="javascript:;">附件列表</a></li>
+					<li><a data-href="${pageContext.request.contextPath}/affix/recycle_list.html" data-title="回收站" href="javascript:void(0)">回收站</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-member">
+			<dt><i class="Hui-iconfont">&#xe63c;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="${pageContext.request.contextPath}/admin/system-base.html" data-title="友链列表" href="javascript:;">友链列表</a></li>
+					<li><a data-href="${pageContext.request.contextPath}/admin/system-data.html" data-title=">系统配置" href="javascript:;">系统配置</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<!-- <dl id="menu-admin">
+			<dt><i class="Hui-iconfont">&#xe62e;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="admin-role.html" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
+					<li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+					<li><a data-href="admin-list.html" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-tongji">
+			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="charts-1.html" data-title="折线图" href="javascript:void(0)">折线图</a></li>
+					<li><a data-href="charts-2.html" data-title="时间轴折线图" href="javascript:void(0)">时间轴折线图</a></li>
+					<li><a data-href="charts-3.html" data-title="区域图" href="javascript:void(0)">区域图</a></li>
+					<li><a data-href="charts-4.html" data-title="柱状图" href="javascript:void(0)">柱状图</a></li>
+					<li><a data-href="charts-5.html" data-title="饼状图" href="javascript:void(0)">饼状图</a></li>
+					<li><a data-href="charts-6.html" data-title="3D柱状图" href="javascript:void(0)">3D柱状图</a></li>
+					<li><a data-href="charts-7.html" data-title="3D饼状图" href="javascript:void(0)">3D饼状图</a></li>
+			</ul>
+		</dd>
+	</dl> -->
+		
+</div>
+</aside>
+<div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
 <section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont"></i> <a href="/" class="maincolor">首页</a> 
-		<span class="c-999 en">&gt;</span>
-		<span class="c-666">我的桌面</span> 
-		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
-	<div class="Hui-article">
-		<article class="cl pd-20">
-			<p class="f-20 text-success">welcome to 湖南中楷众拓项目管理咨询有限公司 
-				<span class="f-14">v1.2</span>
-			</p>
-<!-- 			<p>登录次数：18 </p> -->
-<!-- 			<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p> -->
-			<table class="table table-border table-bordered table-bg" style="display: none">
-				<thead>
-					<tr>
-						<th colspan="7" scope="col">信息统计</th>
-			</tr>
-					<tr class="text-c">
-						<th>统计</th>
-						<th>资讯库</th>
-						<th>图片库</th>
-						<th>产品库</th>
-						<th>用户</th>
-						<th>管理员</th>
-			</tr>
-		</thead>
-				<tbody>
-					<tr class="text-c">
-						<td>总数</td>
-						<td>92</td>
-						<td>9</td>
-						<td>0</td>
-						<td>8</td>
-						<td>20</td>
-			</tr>
-					<tr class="text-c">
-						<td>今日</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-			</tr>
-					<tr class="text-c">
-						<td>昨日</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-			</tr>
-					<tr class="text-c">
-						<td>本周</td>
-						<td>2</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-			</tr>
-					<tr class="text-c">
-						<td>本月</td>
-						<td>2</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-						<td>0</td>
-			</tr>
-		</tbody>
-	</table>
-			<table class="table table-border table-bordered table-bg mt-20">
-				<thead>
-					<tr>
-						<th colspan="2" scope="col">服务器信息</th>
-			</tr>
-		</thead>
-				<tbody>
-					<tr>
-						<th width="30%">服务器计算机名</th>
-						<td><span id="lbServerName">instance-e0wv0zts</span></td>
-			</tr>
-					<tr>
-						<td>服务器IP地址</td>
-						<td>182.61.54.100</td>
-			</tr>
-					<tr>
-						<td>服务器域名</td>
-						<td>www.zjhbidding.com</td>
-			</tr>
-					<tr>
-						<td>服务器端口 </td>
-						<td>8082</td>
-			</tr>
-				<!-- 	<tr>
-						<td>服务器IIS版本 </td>
-						<td>Microsoft-IIS/6.0</td>
-			</tr>
-					<tr>
-						<td>本文件所在文件夹 </td>
-						<td>D:\WebSite\HanXiPuTai.com\XinYiCMS.Web\</td>
-			</tr> -->
-					 <tr>
-						<td>服务器操作系统 </td>
-						<td>CentOS / 7 </td>
-			</tr> 
-					<tr>
-				<!--		<td>系统所在文件夹 </td>
-						<td>/zjh/apache-tomcat-7.0.57</td>
-			</tr>-->
-					<tr>
-						<td>服务器的语言种类 </td>
-						<td>English (People's Republic of English)</td>
-			</tr>
-					<tr>
-						<td>CPU 总数 </td>
-						<td>1</td>
-			</tr>
-					<tr>
-						<td>虚拟内存 </td>
-						<td>1G</td>
-			</tr>
-
-					<tr>
-						<td>当前系统用户名 </td>
-						<td>Admin</td>
-			</tr>
-		</tbody>
-	</table>
-</article>
+	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+				<li class="active">
+					<span title="我的桌面" data-href="welcome.html">我的桌面</span>
+					<em></em></li>
+		</ul>
+	</div>
+		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+</div>
+	<div id="iframe_box" class="Hui-article">
+		<div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+			<iframe scrolling="yes" frameborder="0" src="welcome.do"></iframe>
+	</div>
 </div>
 </section>
-<jsp:include page="util/footer.jsp"></jsp:include>
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript">
 
+<div class="contextMenu" id="Huiadminmenu">
+	<ul>
+		<li id="closethis">关闭当前 </li>
+		<li id="closeall">关闭全部 </li>
+	</ul>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#min_title_list li").contextMenu('Huiadminmenu', {
+		bindings: {
+			'closethis': function(t) {
+				console.log(t);
+				if(t.find("i")){
+					t.find("i").trigger("click");
+				}		
+			},
+			'closeall': function(t) {
+				alert('Trigger was '+t.id+'\nAction was Email');
+			},
+		}
+	});
+});
+/*个人信息*/
+function myselfinfo(){
+	layer.open({
+		type: 1,
+		area: ['300px','200px'],
+		fix: false, //不固定
+		maxmin: true,
+		shade:0.4,
+		title: '查看信息',
+		content: '<div>管理员信息</div>'
+	});
+}
+
+/*资讯-添加*/
+function article_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*图片-添加*/
+function picture_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*产品-添加*/
+function product_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+
+</script> 
+
+<!--此乃百度统计代码，请自行删除-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 </script>
-<!--/请在上方写此页面业务相关的脚本-->
+<!--/此乃百度统计代码，请自行删除-->
 </body>
 </html>

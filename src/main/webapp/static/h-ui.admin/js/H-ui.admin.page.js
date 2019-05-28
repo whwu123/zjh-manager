@@ -86,7 +86,7 @@ function getHTMLDate(obj) {
 };
 
 /*个人信息*/
-function myselfinfo(content){
+function myselfinfo(){
 	layer.open({
 		type: 1,
 		area: ['300px','200px'],
@@ -94,7 +94,7 @@ function myselfinfo(content){
 		maxmin: true,
 		shade:0.4,
 		title: '查看信息',
-		content: content
+		content: '<div>管理员信息</div>'
 	});
 }
 $(function(){

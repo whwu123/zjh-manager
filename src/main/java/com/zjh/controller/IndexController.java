@@ -18,4 +18,9 @@ public class IndexController extends BaseController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String welcome(Model model,HttpSession session) {
+		return "util/welcome";
+	}
+	
 }

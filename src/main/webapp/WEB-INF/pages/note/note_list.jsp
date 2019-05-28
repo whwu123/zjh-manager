@@ -7,17 +7,10 @@
 <title>留言管理</title>
 </head>
 <body>
-<jsp:include page="../util/header.jsp"></jsp:include>
-<jsp:include page="../util/menu.jsp"></jsp:include>
+<%-- <jsp:include page="../util/header.jsp"></jsp:include>
+<jsp:include page="../util/menu.jsp"></jsp:include> --%>
 
-<section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
-		<span class="c-gray en">&gt;</span>
-		留言管理
-		<span class="c-gray en">&gt;</span>
-		留言列表
-		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
-	</nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 留言管理<span class="c-gray en">&gt;</span> 留言列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<form action="${pageContext.request.contextPath}/note/note_list.do" method="post" id="checkForm">
@@ -81,7 +74,6 @@
 			</div>
 		</article>
 	</div>
-</section>
 
 <jsp:include page="../util/footer.jsp"></jsp:include>
 

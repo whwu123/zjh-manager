@@ -7,15 +7,7 @@
 <title>配置管理</title>
 </head>
 <body>
-<jsp:include page="../util/header.jsp"></jsp:include>
-<jsp:include page="../util/menu.jsp"></jsp:include>
-
-<section class="Hui-article-box">
-	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页
-		<span class="c-gray en">&gt;</span>
-		配置管理
-		<span class="c-gray en">&gt;</span>
-		配置列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a> </nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 配置管理<span class="c-gray en">&gt;</span>配置列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 	<div class="Hui-article">
 		<article class="cl pd-20">
 		<form action="${pageContext.request.contextPath}/admin/system-data.do" method="post" id="checkForm">
@@ -38,7 +30,7 @@
 				<button type="button" class="btn btn-success" id="checkAffix" name="checkAffix" onclick="shouAffix();"><i class="Hui-iconfont">&#xe665;</i> 搜配置</button>
 			</div>
 		</form>
-			<div class="cl pd-5 bg-1 bk-gray mt-20">
+			<div class="cl pd-5 bg-1 bk-gray mt-20" style="line-height: 30px;">
 				<span class="l"> 
 <!-- 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>  -->
 				<a href="javascript:;" onclick="my_affix_add('添加配置','${pageContext.request.contextPath}/admin/add-base-data.html','900','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加配置</a> </span>
@@ -90,9 +82,7 @@
 			<input type="button" value="末 页"  class="btn btn-primary radius" onclick="getPageView('last');">
 			</div>
 		</article>
-		
 	</div>
-</section>
 
 <jsp:include page="../util/footer.jsp"></jsp:include>
 
