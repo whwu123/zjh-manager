@@ -114,4 +114,20 @@ public class AdminController extends BaseController {
 		}
 		return "admin/add_base_data";
 	}
+	
+	//禁用启用修改
+	@RequestMapping(value = "/update_base")
+	@ResponseBody
+	public String update_base(String fId, Integer status){
+		if(fId!=null) {
+			Items items = itemsService.selectItemsByFid(fId, null);
+			if(items != null) {
+				items.setfStatus(status);
+				if(itemsService.updateSelective(items)) {
+					return "success";
+				}
+			}
+		}
+		return "fail";
+	}
 }

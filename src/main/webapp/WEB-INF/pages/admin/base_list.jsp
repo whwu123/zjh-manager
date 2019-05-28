@@ -33,7 +33,7 @@
 			<div class="cl pd-5 bg-1 bk-gray mt-20" style="line-height: 30px;">
 				<span class="l"> 
 <!-- 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>  -->
-				<a href="javascript:;" onclick="my_affix_add('添加链接','${pageContext.request.contextPath}/admin/add-base.html','900','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加链接</a> </span>
+				<a href="javascript:;" onclick="my_affix_add('添加链接','${pageContext.request.contextPath}/admin/add-base.html','900','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加链接</a> </span>
 				<span class="r">当前页码：<strong >${pageView.pageNum }</strong> / <strong >${pageView.totalPage }</strong>&nbsp;&nbsp;&nbsp;  共有数据：<strong id="affixTotalCount">${pageView.totalCount }</strong> 条</span>
 			</div>
 			<div class="mt-20">
@@ -46,8 +46,8 @@
 						<th width="40">序号</th>
 						<th width="150">名称</th>
 						<th width="150">URL</th>
-						<th width="80">状态</th>
 						<th width="120">创建时间</th>
+						<th width="50">状态</th>
 						<th width="130">操作</th>
 					</tr>
 				</thead>
@@ -57,12 +57,13 @@
 						<td>${vs.count }</td>
 						<td>${item.fTitle }</td>
 						<td>${item.fUrl }</td>
-						<td>
-							<c:if test="${item.fStatus == 1 }">启用</c:if>
-							<c:if test="${item.fStatus == 0 }">禁用</c:if>
-						</td>
+						
 						<td>
 							<fmt:formatDate value="${item.fCreatetime  }" pattern="yyyy-MM-dd HH:mm"/>
+						</td>
+						<td>
+							<c:if test="${item.fStatus == 1 }"><a style="text-decoration: none;" onclick="chageStatus('${item.fId }',0);"><i class="Hui-iconfont">&#xe615;</i>启用</a></c:if>
+							<c:if test="${item.fStatus == 0 }"><a style="text-decoration: none;" onclick="chageStatus('${item.fId }',1);"><i class="Hui-iconfont">&#xe601;</i>禁用</a></c:if>
 						</td>
 						<td class="td-manage">
 							<a title="查看" style="text-decoration:none" onClick="show_item('查看','${pageContext.request.contextPath}/admin/add-base.html?fId=${item.fId }')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i></a>
@@ -175,7 +176,30 @@ function shouAffix(){
 	$("#currentPageNum").val("1");
 	$("#checkForm").submit();
 }
-
+function chageStatus(id,status){
+	var message = "";
+	if(status == 1){
+		message = "确定启用此配置吗？";
+	}else if(status == 0 ){
+		message = "确定禁用此配置吗？"
+	}
+	layer.confirm(message,function(index){
+	$.ajax({
+			url:"${pageContext.request.contextPath}/admin/update_base.do",
+            type:"post",
+            data:{fId:id,status:status},
+            success:function(data){
+ 				if(data == "success"){
+ 					 //window.location.href='${pageContext.request.contextPath}/admin/system-base.html';
+					//刷新当前窗口
+ 					self.location.reload();
+ 				}else{
+ 					layer.msg('修改失败!',{icon:1,time:3000});
+ 				}
+            }
+		})
+	});
+}
 
 </script> 
 <!--/请在上方写此页面业务相关的脚本-->

@@ -16,10 +16,11 @@
 					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
 						
 						<ul class="dropDown-menu menu radius box-shadow">
-								<li><a href="javascript:;" onclick="news_add('添加新闻','${pageContext.request.contextPath}/news/select.html')"><i class="Hui-iconfont">&#xe616;</i> 新闻</a></li>
-								<li><a href="javascript:;" onclick="case_add('添加案例','${pageContext.request.contextPath}/case/select.html')"><i class="Hui-iconfont">&#xe613;</i> 案例</a></li>
-								<li><a href="javascript:;" onclick="affix_add('添加附件','${pageContext.request.contextPath}/affix/add_affix.html')"><i class="Hui-iconfont">&#xe620;</i> 附件</a></li>
-								<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+								<li><a href="javascript:;" onclick="news_add('添加新闻','${pageContext.request.contextPath}/news/select.html','','800')"><i class="Hui-iconfont">&#xe616;</i> 新闻</a></li>
+								<li><a href="javascript:;" onclick="case_add('添加案例','${pageContext.request.contextPath}/case/select.html','','800')"><i class="Hui-iconfont">&#xe613;</i> 案例</a></li>
+								<li><a href="javascript:;" onclick="affix_add('添加附件','${pageContext.request.contextPath}/affix/add_affix.html','','400')"><i class="Hui-iconfont">&#xe63e;</i> 附件</a></li>
+								<li><a href="javascript:;" onclick="base_add('添加友链','${pageContext.request.contextPath}/admin/add-base.html','','500')"><i class="Hui-iconfont">&#xe6f1;</i> 友链</a></li>
+								<!-- <li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li> -->
 						</ul>
 				</li>
 			</ul>
@@ -31,8 +32,8 @@
 					<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-						<li><a href="#">切换账户</a></li>
-						<li><a href="#">退出</a></li>
+						<!-- <li><a href="#">切换账户</a></li> -->
+						<li><a onclick="logout();">退出</a></li>
 				</ul>
 			</li>
 				<!-- <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li> -->
@@ -137,28 +138,26 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="welcome.do"></iframe>
+			<iframe id="myiframe" scrolling="yes" frameborder="0" src="welcome.do"></iframe>
 	</div>
 </div>
 </section>
 
-<div class="contextMenu" id="Huiadminmenu">
+<!-- <div class="contextMenu" id="Huiadminmenu">
 	<ul>
 		<li id="closethis">关闭当前 </li>
 		<li id="closeall">关闭全部 </li>
 	</ul>
-</div>
-<!--_footer 作为公共模版分离出去-->
+</div> -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/h-ui.admin/js/H-ui.admin.js"></script>
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#min_title_list li").contextMenu('Huiadminmenu', {
+	/* $("#min_title_list li").contextMenu('Huiadminmenu', {
 		bindings: {
 			'closethis': function(t) {
 				console.log(t);
@@ -170,7 +169,7 @@ $(function(){
 				alert('Trigger was '+t.id+'\nAction was Email');
 			},
 		}
-	});
+	}); */
 });
 /*个人信息*/
 function myselfinfo(){
@@ -181,55 +180,64 @@ function myselfinfo(){
 		maxmin: true,
 		shade:0.4,
 		title: '查看信息',
-		content: '<div>管理员信息</div>'
+		content: '<div>&nbsp;管理员信息</div>'
 	});
+}
+function logout(){
+	$.ajax({
+			type:'post',
+			url:'logout.do', 
+			success:function(data){  
+        	   if(data=="success"){ 
+                   location.href = 'login.jsp';//进入后台首页  
+                }else{  
+                   layer.msg('注销失败!！',{icon:2,time:1500});
+               }  
+        	}
+		})
+
 }
 
-/*资讯-添加*/
-function article_add(title,url){
-	var index = layer.open({
+
+
+/*新闻-添加*/
+function news_add(title,url,w,h){
+	/* var index = layer.open({
 		type: 2,
 		title: title,
 		content: url
 	});
-	layer.full(index);
+	layer.full(index); */
+	layer_show(title,url,w,h);
 }
-/*图片-添加*/
-function picture_add(title,url){
-	var index = layer.open({
+/*案例-添加*/
+function case_add(title,url,w,h){
+	/* var index = layer.open({
 		type: 2,
 		title: title,
 		content: url
 	});
-	layer.full(index);
+	layer.full(index); */
+	layer_show(title,url,w,h);
 }
-/*产品-添加*/
-function product_add(title,url){
-	var index = layer.open({
+/*附件-添加*/
+function affix_add(title,url,w,h){
+	/* var index = layer.open({
 		type: 2,
 		title: title,
 		content: url
-	});
-	layer.full(index);
+	}); */
+	layer_show(title,url,w,h);
 }
 /*用户-添加*/
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
+function base_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
 
 
 </script> 
-
-<!--此乃百度统计代码，请自行删除-->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-<!--/此乃百度统计代码，请自行删除-->
 </body>
 </html>

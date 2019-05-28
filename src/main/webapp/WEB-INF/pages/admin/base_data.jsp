@@ -46,9 +46,9 @@
 						<th width="40">序号</th>
 						<th width="150">名称</th>
 						<th width="150">内容</th>
-						<th width="60">状态</th>
-						<th width="100">创建时间</th>
 						<th width="120">关键词</th>
+						<th width="100">创建时间</th>
+						<th width="50">状态</th>
 						<th width="130">操作</th>
 					</tr>
 				</thead>
@@ -59,13 +59,13 @@
 						<td>${item.fTitle }</td>
 						<td>${item.fContent }</td>
 						<td>
-							<c:if test="${item.fStatus == 1 }">启用</c:if>
-							<c:if test="${item.fStatus == 0 }">禁用</c:if>
-						</td>
-						<td>
 							<fmt:formatDate value="${item.fCreatetime  }" pattern="yyyy-MM-dd HH:mm"/>
 						</td>
 						<td>${item.fKey }</td>
+						<td>
+							<c:if test="${item.fStatus == 1 }"><a style="text-decoration: none;" onclick="chageStatus('${item.fId }',0);"><i class="Hui-iconfont">&#xe615;</i>启用</a></c:if>
+							<c:if test="${item.fStatus == 0 }"><a style="text-decoration: none;" onclick="chageStatus('${item.fId }',1);"><i class="Hui-iconfont">&#xe601;</i>禁用</a></c:if>
+						</td>
 						<td class="td-manage">
 							<a title="查看" style="text-decoration:none" onClick="show_item('查看','${pageContext.request.contextPath}/admin/add-base-data.html?fId=${item.fId }')" href="javascript:;" ><i class="Hui-iconfont">&#xe6df;</i></a>
 							<a title="删除" href="javascript:;" onclick="items_del(this,'${item.fId }')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
@@ -177,7 +177,30 @@ function shouAffix(){
 	$("#currentPageNum").val("1");
 	$("#checkForm").submit();
 }
-
+function chageStatus(id,status){
+	var message = "";
+	if(status == 1){
+		message = "确定启用此配置吗？";
+	}else if(status == 0 ){
+		message = "确定禁用此配置吗？"
+	}
+	layer.confirm(message,function(index){
+	$.ajax({
+			url:"${pageContext.request.contextPath}/admin/update_base.do",
+            type:"post",
+            data:{fId:id,status:status},
+            success:function(data){
+ 				if(data == "success"){
+ 					 //window.location.href='${pageContext.request.contextPath}/admin/system-base.html';
+					//刷新当前窗口
+ 					self.location.reload();
+ 				}else{
+ 					layer.msg('修改失败!',{icon:1,time:3000});
+ 				}
+            }
+		})
+	});
+}
 
 </script> 
 <!--/请在上方写此页面业务相关的脚本-->
