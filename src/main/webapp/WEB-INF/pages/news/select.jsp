@@ -64,8 +64,8 @@
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">新闻内容：</label>
 			<div class="formControls col-xs-8 col-sm-9"> 
-				<textarea name="content" id="editor" style="width:100%;height:400px;">${news.content}</textarea>
-				<script type="text/plain" id="editor" style="width:100%;height:400px;"></script>
+				<textarea name="content" id="editor" style="width:100%;height:250px;">${news.content}</textarea>
+				<script type="text/plain" id="editor" style="width:100%;height:250px;"></script>
 			</div>
 		</div>
 		<div class="row cl">
