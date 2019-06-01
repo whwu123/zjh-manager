@@ -60,7 +60,7 @@ public class NewsController extends BaseController {
 		return "news/select";
 	}
 
-	@RequestMapping(value = "/add")
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public String add(HttpServletRequest request,String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile) throws Exception {
 		// 新增方法
@@ -202,12 +202,7 @@ public class NewsController extends BaseController {
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
 			        }
 			        //News newsNex = NewsSelUtil.getNewsPrev(connection);
-			        News newsNex = newsService.getNewsNext(1);
-			        if(newsNex!=null){
-			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
-			        }else{
-			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
-			        }
+			        htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了"); 
 			        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
 			        news.setStaticpage(newsStaticPage);
 			        if(newsService.update(news)>0){
@@ -281,12 +276,13 @@ public class NewsController extends BaseController {
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
 			        }
 			        //News newsNex = NewsSelUtil.getNewsPrev(connection);
-			        News newsNex = newsService.getNewsNext(2);
-			        if(newsNex!=null){
-			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
-			        }else{
-			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
-			        }
+					/*
+					 * News newsNex = newsService.getNewsNext(2); if(newsNex!=null){
+					 * htmlcode=htmlcode.replaceAll("###newsnext###",
+					 * "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>"); }else{
+					 * htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了"); }
+					 */
+			        htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了"); 
 			        fsh.WriteFile(htmlcode, OutHTMLpath+newsStaticPage);//生成静态文件
 			        news.setStaticpage(newsStaticPage);
 			        if(newsService.update(news)>0){
@@ -308,7 +304,7 @@ public class NewsController extends BaseController {
 		//out.close();
 	}
 
-	@RequestMapping(value = "/update")
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public String update(HttpServletRequest request,Integer id, String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile) {
 		// 更新方法

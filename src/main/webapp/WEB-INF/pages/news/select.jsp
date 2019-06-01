@@ -1,5 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../util/meta.jsp"></jsp:include>
 
 <link href="${pageContext.request.contextPath}/lib/webuploader/0.1.5/webuploader.css" rel="stylesheet" type="text/css" />
@@ -32,8 +32,8 @@
 			<div class="formControls col-xs-8 col-sm-9">
 				<span class="select-box">
 					<select name="type" class="select">
-						<option value="1">公司新闻</option>
-						<option value="2">行业新闻</option>
+						<option value="1" <c:if test="${news.type ==1 }">selected="selected"</c:if>>公司新闻</option>
+						<option value="2" <c:if test="${news.type ==2 }">selected="selected"</c:if>>行业新闻</option>
 					</select>
 				</span>
 			</div>
