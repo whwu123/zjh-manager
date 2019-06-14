@@ -92,21 +92,22 @@
 			<dd>
 				<ul>
 					<li><a data-href="${pageContext.request.contextPath}/admin/system-base.html" data-title="友链列表" href="javascript:;">友链列表</a></li>
-					<li><a data-href="${pageContext.request.contextPath}/admin/system-data.html" data-title="系统配置" href="javascript:;">系统配置</a></li>
+					<%-- <li><a data-href="${pageContext.request.contextPath}/admin/system-data.html" data-title="系统配置" href="javascript:;">系统配置</a></li> --%>
 			</ul>
 		</dd>
 	</dl>
-		<!-- <dl id="menu-admin">
+	<%-- <dl id="menu-admin">
 			<dt><i class="Hui-iconfont">&#xe62e;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a data-href="admin-role.html" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
-					<li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
-					<li><a data-href="admin-list.html" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+					<li><a data-href="${pageContext.request.contextPath}/admin/admin_dept.html" data-title="部门管理" href="javascript:void(0)">部门管理</a></li>
+					<li><a data-href="${pageContext.request.contextPath}/admin/admin_roles.do" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
+					<li><a data-href="${pageContext.request.contextPath}/admin/admin-permission.do" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+					<li><a data-href="${pageContext.request.contextPath}/admin/admin-list.do" data-title="员工列表" href="javascript:void(0)">管理员列表</a></li>
 			</ul>
 		</dd>
-	</dl>
-		<dl id="menu-tongji">
+	</dl> --%>
+	<!-- 	<dl id="menu-tongji">
 			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>

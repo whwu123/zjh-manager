@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjh.mapper.RolesMapper" >
+
+  <resultMap id="BaseResultMap" type="com.zjh.pojo.Roles" >
+    <id column="r_id" property="rId" jdbcType="VARCHAR" />
+    <result column="r_code" property="rCode" jdbcType="VARCHAR" />
+    <result column="r_name" property="rName" jdbcType="VARCHAR" />
+    <result column="r_sort" property="rSort" jdbcType="INTEGER" />
+    <result column="r_status" property="rStatus" jdbcType="INTEGER" />
+    <result column="r_date" property="rDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <insert id="insertSelective" parameterType="com.zjh.pojo.Roles" >
+    insert into roles
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        r_id,
+      </if>
+      <if test="rCode != null" >
+        r_code,
+      </if>
+      <if test="rName != null" >
+        r_name,
+      </if>
+      <if test="rSort != null" >
+        r_sort,
+      </if>
+      <if test="rStatus != null" >
+        r_status,
+      </if>
+      <if test="rDate != null" >
+        r_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rId != null" >
+        #{rId,jdbcType=VARCHAR},
+      </if>
+      <if test="rCode != null" >
+        #{rCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rName != null" >
+        #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rSort != null" >
+        #{rSort,jdbcType=INTEGER},
+      </if>
+      <if test="rStatus != null" >
+        #{rStatus,jdbcType=INTEGER},
+      </if>
+      <if test="rDate != null" >
+        #{rDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="deleteRolesByDid" parameterType="java.lang.String" >
+    delete from roles  where r_id = #{rId,jdbcType=VARCHAR}
+  </delete>
+  
+  <update id="updateSelective" parameterType="com.zjh.pojo.Roles" >
+    update roles
+    <set >
+      <if test="rCode != null" >
+        r_code = #{rCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rName != null" >
+        r_name = #{rName,jdbcType=VARCHAR},
+      </if>
+      <if test="rSort != null" >
+        r_sort = #{rSort,jdbcType=VARCHAR},
+      </if>
+      <if test="rStatus != null" >
+        r_status = #{rStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  r_id = #{rId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+	<select id="getCountTotal"  resultType="java.lang.Integer">
+		select count(r_id) from roles where 1=1
+		<if test="items.rCode != null and items.rCode !='' " >
+          and r_code  like CONCAT('%',#{items.rCode,jdbcType=VARCHAR},'%')
+        </if>
+		<if test="items.rName != null and items.rName !='' " >
+          and r_name  like CONCAT('%',#{items.rName,jdbcType=VARCHAR},'%')
+        </if>
+         <if test="items.rStatus != null" >
+          and r_status  = #{items.rStatus,jdbcType=INTEGER}
+        </if>
+        <if test="items.startTime != null and  items.startTime!='' ">
+  			<![CDATA[
+  			and r_date >= #{items.startTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+  		<if test="items.endTime != null and items.endTime!='' ">
+  			<![CDATA[
+  			and r_date <= #{items.endTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+	</select>  
+	
+	<select id="getList" resultMap="BaseResultMap">
+		select * from roles where 1=1
+		<if test="items.rCode != null and items.rCode !='' " >
+          and r_code  like CONCAT('%',#{items.rCode,jdbcType=VARCHAR},'%')
+        </if>
+		<if test="items.rName != null and items.rName !='' " >
+          and r_name like CONCAT('%',#{items.rName,jdbcType=VARCHAR},'%')
+        </if>
+         <if test="items.rStatus != null" >
+          and r_status  = #{items.rStatus,jdbcType=INTEGER}
+        </if>
+        <if test="items.startTime != null and  items.startTime!='' ">
+  			<![CDATA[
+  			and r_date >= #{items.startTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+  		<if test="items.endTime != null and items.endTime!='' ">
+  			<![CDATA[
+  			and r_date <= #{items.endTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+		order by r_sort desc, r_date desc LIMIT #{items.pagenum},#{items.pagesize}
+	</select>
+	
+	
+	 <select id="getRolesByRid" resultMap="BaseResultMap">
+		select * from roles where r_id = #{rId,jdbcType=VARCHAR}
+	</select>
+	<!--<select id="selectItemsByFid" resultMap="BaseResultMap">
+  		select * from items where f_id = #{fId,jdbcType=VARCHAR}
+  		 <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+    </select>
+	<select id="getItemsByFpid" resultMap="BaseResultMap">
+		select * from items where 1=1
+		<if test="fPid != null and fPid !='' " >
+          and f_pid  = #{fPid,jdbcType=VARCHAR}
+        </if>
+         <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+	</select>
+	<select id="getitemsYL" resultMap="BaseResultMap">
+		SELECT * FROM items where f_type = 1 and f_status = 1
+	</select> -->
+</mapper>

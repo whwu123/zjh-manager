@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjh.mapper.DeptMapper" >
+
+  <resultMap id="BaseResultMap" type="com.zjh.pojo.Dept" >
+    <id column="d_id" property="dId" jdbcType="VARCHAR" />
+    <result column="d_code" property="dCode" jdbcType="VARCHAR" />
+    <result column="d_name" property="dName" jdbcType="VARCHAR" />
+    <result column="d_sort" property="dSort" jdbcType="INTEGER" />
+    <result column="d_status" property="dStatus" jdbcType="INTEGER" />
+    <result column="d_desc" property="dDesc" jdbcType="VARCHAR" />
+    <result column="d_createtime" property="dCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <insert id="insertSelective" parameterType="com.zjh.pojo.Dept" >
+    insert into dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dId != null" >
+        d_id,
+      </if>
+      <if test="dCode != null" >
+        d_code,
+      </if>
+      <if test="dName != null" >
+        d_name,
+      </if>
+      <if test="dSort != null" >
+        d_sort,
+      </if>
+      <if test="dStatus != null" >
+        d_status,
+      </if>
+      <if test="dDesc != null" >
+        d_desc,
+      </if>
+      <if test="dCreateTime != null" >
+        d_createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dId != null" >
+        #{dId,jdbcType=VARCHAR},
+      </if>
+      <if test="dCode != null" >
+        #{dCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null" >
+        #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dSort != null" >
+        #{dSort,jdbcType=INTEGER},
+      </if>
+      <if test="dStatus != null" >
+        #{dStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dDesc != null" >
+        #{dDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="dCreateTime != null" >
+        #{dCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <delete id="deleteDeptByDid" parameterType="java.lang.String" >
+    delete from dept  where d_id = #{dId,jdbcType=VARCHAR}
+  </delete>
+  
+  <update id="updateSelective" parameterType="com.zjh.pojo.Dept" >
+    update dept
+    <set >
+      <if test="dCode != null" >
+        d_code = #{dCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null" >
+        d_name = #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dSort != null" >
+        d_sort = #{dSort,jdbcType=VARCHAR},
+      </if>
+      <if test="dStatus != null" >
+        d_status = #{dStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="dDesc != null" >
+        d_desc = #{dDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  d_id = #{dId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+	<select id="getCountTotal"  resultType="java.lang.Integer">
+		select count(d_id) from dept where 1=1
+		<if test="items.dCode != null and items.dCode !='' " >
+          and d_code  like CONCAT('%',#{items.dCode,jdbcType=VARCHAR},'%')
+        </if>
+		<if test="items.dName != null and items.dName !='' " >
+          and d_name  like CONCAT('%',#{items.dName,jdbcType=VARCHAR},'%')
+        </if>
+         <if test="items.dStatus != null" >
+          and d_status  = #{items.dStatus,jdbcType=INTEGER}
+        </if>
+        <if test="items.startTime != null and  items.startTime!='' ">
+  			<![CDATA[
+  			and d_createtime >= #{items.startTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+  		<if test="items.endTime != null and items.endTime!='' ">
+  			<![CDATA[
+  			and d_createtime <= #{items.endTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+	</select>  
+	
+	<select id="getList" resultMap="BaseResultMap">
+		select * from dept where 1=1
+		<if test="items.dCode != null and items.dCode !='' " >
+          and d_code  like CONCAT('%',#{items.dCode,jdbcType=VARCHAR},'%')
+        </if>
+		<if test="items.dName != null and items.dName !='' " >
+          and d_name like CONCAT('%',#{items.dName,jdbcType=VARCHAR},'%')
+        </if>
+         <if test="items.dStatus != null" >
+          and d_status  = #{items.dStatus,jdbcType=INTEGER}
+        </if>
+        <if test="items.startTime != null and  items.startTime!='' ">
+  			<![CDATA[
+  			and d_createtime >= #{items.startTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+  		<if test="items.endTime != null and items.endTime!='' ">
+  			<![CDATA[
+  			and d_createtime <= #{items.endTime,jdbcType=TIMESTAMP}
+  			]]>
+  		</if>
+		order by d_sort desc, d_createtime desc LIMIT #{items.pagenum},#{items.pagesize}
+	</select>
+	
+	
+	 <select id="getDeptByDid" resultMap="BaseResultMap">
+		select * from dept where d_id  = #{dId,jdbcType=VARCHAR}
+	</select>
+	<!--<select id="selectItemsByFid" resultMap="BaseResultMap">
+  		select * from items where f_id = #{fId,jdbcType=VARCHAR}
+  		 <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+    </select>
+	<select id="getItemsByFpid" resultMap="BaseResultMap">
+		select * from items where 1=1
+		<if test="fPid != null and fPid !='' " >
+          and f_pid  = #{fPid,jdbcType=VARCHAR}
+        </if>
+         <if test="fStatus != null" >
+          and f_status  = #{fStatus,jdbcType=INTEGER}
+        </if>
+	</select>
+	<select id="getitemsYL" resultMap="BaseResultMap">
+		SELECT * FROM items where f_type = 1 and f_status = 1
+	</select> -->
+</mapper>
