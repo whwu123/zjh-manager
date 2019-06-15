@@ -1,6 +1,8 @@
 package com.zjh.controller.util;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -27,13 +29,15 @@ public class FileUploadController extends BaseController {
 	@RequestMapping("fileUpload")
 	@ResponseBody
 	public String springUpload(HttpServletRequest request, HttpServletResponse response,MultipartFile upfile) {
-		//String uid = UUID.randomUUID().toString().replace("-", "");
 		String fileName = upfile.getOriginalFilename();
-		String saveName = System.currentTimeMillis()+fileName;
+		String fileFormat = fileName.substring(fileName.lastIndexOf("."));
+		String saveName =UUID.randomUUID().toString().replaceAll("-", "")+fileFormat;
 		 //获得项目的路径  
-        ServletContext sc = request.getSession().getServletContext();  
+        ServletContext sc = request.getServletContext();
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
+        String dateStr =ft.format(new Date());
         // 上传位置  
-        String path = sc.getRealPath("/images/zjh/"); // 设定文件保存的目录  
+        String path = sc.getRealPath("/images/zjh/"+dateStr); // 设定文件保存的目录  
 		File f = new File(path);  
         if (!f.exists()) {
         	  f.mkdirs(); 
@@ -45,19 +49,19 @@ public class FileUploadController extends BaseController {
             	//上传到本地
             	upfile.transferTo(myFile);
             	//复制一份到前台项目
-            	FileUtils.copyFile(myFile, new File(BaseController.REMOTE_PATH + saveName));
+            	FileUtils.copyFile(myFile, new File(BaseController.REMOTE_PATH +dateStr+ saveName));
           
             } catch (Exception e) {  
                 e.printStackTrace();  
             }  
         }  
         Ueutil ueutil = new Ueutil();
-        ueutil.setOriginal(upfile.getOriginalFilename());
-        ueutil.setTitle(saveName);
+        ueutil.setOriginal(fileName);
+        ueutil.setTitle(fileName);
         ueutil.setSize(upfile.getSize());
         ueutil.setState("SUCCESS");
         ueutil.setType(upfile.getContentType());
-        ueutil.setUrl(saveName);
+        ueutil.setUrl(dateStr+"/"+saveName);
         JSONObject jsonObject  = JSONObject.fromObject(ueutil);
         String json = jsonObject.toString();
 		return json;
