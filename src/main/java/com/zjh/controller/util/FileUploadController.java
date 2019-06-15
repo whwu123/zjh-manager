@@ -37,12 +37,11 @@ public class FileUploadController extends BaseController {
         SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd");
         String dateStr =ft.format(new Date());
         // 上传位置  
-        String path = sc.getRealPath("/images/zjh/"+dateStr); // 设定文件保存的目录  
+        String path = sc.getRealPath("images/zjh/"+dateStr); // 设定文件保存的目录  
 		File f = new File(path);  
         if (!f.exists()) {
-        	  f.mkdirs(); 
+        	  f.mkdir(); 
         }
-       
         if (!upfile.isEmpty()) {  
             try {  
             	File myFile = new File(path, saveName);
@@ -50,7 +49,6 @@ public class FileUploadController extends BaseController {
             	upfile.transferTo(myFile);
             	//复制一份到前台项目
             	FileUtils.copyFile(myFile, new File(BaseController.REMOTE_PATH +dateStr+ saveName));
-          
             } catch (Exception e) {  
                 e.printStackTrace();  
             }  
@@ -65,7 +63,5 @@ public class FileUploadController extends BaseController {
         JSONObject jsonObject  = JSONObject.fromObject(ueutil);
         String json = jsonObject.toString();
 		return json;
-		
 	}
-	
 }

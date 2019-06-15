@@ -45,5 +45,5 @@ public interface NewsMapper {
 	 * @param newsId
 	 * @return
 	 */
-	News getNewsNext(@Param("type")Integer type);
+	News getNewsNext(@Param("newsId")Integer newsId,@Param("type")Integer type);
 }

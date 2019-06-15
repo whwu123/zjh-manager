@@ -75,14 +75,14 @@ public class NewsController extends BaseController {
 		news.setStatus(StatusConstant.ENABLE_STATUS);
 		
 		if (!imageFile.isEmpty()) {
-			String fileName = "news_" + System.currentTimeMillis() + ".jpg";
-			 //获得项目的路径  
-	        ServletContext sc = request.getSession().getServletContext();  
-	        // 上传位置  
-	        String path = sc.getRealPath("/images/zjh/cover/"); // 设定文件保存的目录  
+			String fileName = imageFile.getOriginalFilename();
+			String fileFormat = fileName.substring(fileName.lastIndexOf("."));
+			fileName = "news_" + System.currentTimeMillis() + fileFormat;
+			 //获得项目的路径  上传位置  
+	        String path =  request.getServletContext().getRealPath("/images/zjh/cover/"); // 设定文件保存的目录  
 	        File f = new File(path);  
 	        if (!f.exists()) {
-	        	  f.mkdirs(); 
+	        	  f.mkdir(); 
 	        }
 			try {
 				File myFile = new File(path, fileName);
@@ -196,7 +196,7 @@ public class NewsController extends BaseController {
 			    	}
 			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
 			    	News newsPrev = newsService.getNewsPrev(news.getId(),1);
-			        if(newsPrev!=null){
+			        if(newsPrev != null && newsPrev!=null){
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
 			        }else{
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
@@ -270,7 +270,7 @@ public class NewsController extends BaseController {
 			    	}
 			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
 			    	News newsPrev = newsService.getNewsPrev(news.getId(),2);
-			        if(newsPrev!=null){
+			        if(newsPrev!=null && newsPrev!=null){
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
 			        }else{
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
@@ -316,14 +316,15 @@ public class NewsController extends BaseController {
 		news.setDescription(description);
 		news.setContent(content);
 		if (!imageFile.isEmpty()) {
-			String fileName = "news_" + System.currentTimeMillis() + ".jpg";
+			String fileName = imageFile.getOriginalFilename();
+			String fileFormat = fileName.substring(fileName.lastIndexOf("."));
+			fileName = "news_" + System.currentTimeMillis() + fileFormat;
 			 //获得项目的路径  
-	        ServletContext sc = request.getSession().getServletContext();  
 	        // 上传位置  
-	        String path = sc.getRealPath("/images/zjh/cover/"); // 设定文件保存的目录  
+	        String path = request.getServletContext().getRealPath("/images/zjh/cover/"); // 设定文件保存的目录  
 	        File f = new File(path);  
 	        if (!f.exists()) {
-	        	  f.mkdirs(); 
+	        	  f.mkdir(); 
 	        }
 //	        File f2 = new File(BaseController.COVER_PATH);
 //	        if (!f2.exists()) {
@@ -420,14 +421,14 @@ public class NewsController extends BaseController {
 			    	
 			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
 			        News newsPrev = newsService.getNewsPrev(news.getId(), 1);
-			        if(newsPrev.getStaticpage()!=null){
+			        if(newsPrev!=null && newsPrev.getStaticpage()!=null){
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
 			        }else{
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
 			        }
 			        //News newsNex = NewsSelUtil.getNewsNext(connection);
-			        News newsNex = newsService.getNewsNext(1);
-			        if(newsNex.getStaticpage()!=null){
+			        News newsNex = newsService.getNewsNext(news.getId(),1);
+			        if(newsNex!=null && newsNex.getStaticpage()!=null){
 			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
 			        }else{
 			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");
@@ -502,14 +503,14 @@ public class NewsController extends BaseController {
 			    	
 			        //News newsPrev = NewsSelUtil.getNewsPrev(connection, news.getId());
 			        News newsPrev = newsService.getNewsPrev(news.getId(), 2);
-			        if(newsPrev.getStaticpage()!=null){
+			        if(newsPrev !=null &&  newsPrev.getStaticpage()!=null){
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "<a href='"+newsPrev.getStaticpage()+"'>"+newsPrev.getTitle()+"</a>");
 			        }else{
 			        	 htmlcode=htmlcode.replaceAll("###newsprev###", "没有新闻了");
 			        }
 			        //News newsNex = NewsSelUtil.getNewsNext(connection);
-			        News newsNex = newsService.getNewsNext(2);
-			        if(newsNex.getStaticpage()!=null){
+			        News newsNex = newsService.getNewsNext(news.getId(),2);
+			        if(newsNex !=null && newsNex.getStaticpage()!=null){
 			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "<a href='"+newsNex.getStaticpage()+"'>"+newsNex.getTitle()+"</a>");
 			        }else{
 			        	 htmlcode=htmlcode.replaceAll("###newsnext###", "没有新闻了");

@@ -64,8 +64,8 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public News getNewsNext(Integer type) {
-		return newsMapper.getNewsNext(type);
+	public News getNewsNext(Integer newsId,Integer type) {
+		return newsMapper.getNewsNext(newsId,type);
 	}
 
 }

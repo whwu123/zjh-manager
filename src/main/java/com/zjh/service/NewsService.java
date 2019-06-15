@@ -26,6 +26,6 @@ public interface NewsService {
 	 * @param newsId
 	 * @return
 	 */
-	News getNewsNext(Integer type);
+	News getNewsNext(Integer newsId,Integer type);
 	
 }
