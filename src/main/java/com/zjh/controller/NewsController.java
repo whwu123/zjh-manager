@@ -60,7 +60,7 @@ public class NewsController extends BaseController {
 		return "news/select";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add")
 	@ResponseBody
 	public String add(HttpServletRequest request,String title, String author, String sources, Integer type, String description, String content, @RequestParam("imageFile") MultipartFile imageFile) throws Exception {
 		// 新增方法
