@@ -24,6 +24,7 @@
 							<option value="0">全部分类</option>
 							<option ${type==1?'selected':''} value="1">公司新闻</option>
 							<option ${type==2?'selected':''} value="2">行业新闻</option>
+							<option ${type==3?'selected':''} value="3">员工风采</option>
 						</select>
 					</span>
 					<button type="submit" class="btn btn-success search"><i class="Hui-iconfont">&#xe665;</i> 搜新闻</button>
@@ -64,7 +65,7 @@
 						<c:if test="${obj.staticpage==null }">
 							<td>没有静态页面生成</td>
 						</c:if>
-						<td>${obj.type==1?'公司新闻':obj.type==2?'行业新闻':'未知'}</td>
+						<td>${obj.type==1?'公司新闻':obj.type==2?'行业新闻':obj.type==3?'员工风采':'未知'}</td>
 						
 						<c:if test="${obj.sysimg == null }"><td>暂时没有上传封面</td></c:if>
 						<c:if test="${obj.sysimg != null }">

@@ -27,8 +27,8 @@
 <link rel="stylesheet" type="text/css" href="../Assets/css/responsive.css">
 <link rel="stylesheet" type="text/css" href="../Assets/css/common.css" />
 <link rel="stylesheet" type="text/css" href="../Assets/css/my.css" />
-<link rel="Bookmark" href="favicon.ico" >
-<link rel="Shortcut Icon" href="favicon.ico" />
+<link rel="Bookmark" href="../favicon.ico" >
+<link rel="Shortcut Icon" href="../favicon.ico" />
   <style type="text/css">
 .tit{
 	font-size: 20px;
@@ -61,7 +61,7 @@
                                 <img src="../Assets/images/weixin.jpg" width="145" class="weixin" style="display:none;margin:-100px 57px 0 0" />
                             </a>
                         </li>
-                        <li id="tel1">
+                       <!--  <li id="tel1">
                             <a href="https://shop221796420.taobao.com" target="_blank" >
                                 <div class="hides" style="width:161px;display:none;" id="tels1">
                                     <div class="hides" id="p1">
@@ -72,7 +72,7 @@
                                 </div>
                                 <img src="../Assets/images/taobao.png" width="47" height="49" class="shows" />
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=###company_qq###&site=qq&menu=yes">
                                 <div class="hides" style="width:161px;display:none;" id="qq">
@@ -119,50 +119,39 @@
         <div class="nav_m">
             <div class="n_icon">导航栏</div>
             <ul class="nav clearfix">
-                <li><a href="http://www.zjhbidding.com">首页</a></li>
-                <li>
-                	<a href="../about.html">关于我们</a>
-                    <div class="er">
-                    	<div class="er_m">
-                            <i>&nbsp;</i>
-                            <ul>
-                                <li><a href="../about.html">公司简介</a></li>
-                                <li><a href="../about2.html">中楷众拓优势</a></li>
-                                <li><a href="../about3.html">组织架构</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                	<a href="../product.html">政策法规</a>
-                    <div class="er">
-                    	<div class="er_m">
-                            <i>&nbsp;</i>
-                            <ul>
-                                <li><a href="../product.html">电力法</a></li>
-                                <li><a href="../product2.html">招投标法</a></li>
-                                <li><a href="../product3.html">政府采购法</a></li>
-                            	<li><a href="../product4.html">投标管理办法</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
+               <!--  <li class="now"><a href="http://www.zjhbidding.com">首页</a></li>  -->
+                <li id="sy">
+                	<a href="http://127.0.0.1:8080/zjhWeb">首页</a>
+                </li> 
                 
-                 <li>
+                <li id="zbdl" >
+                	<a href="../zbdl.html" style="font-weight: bolder;color: red">招标代理</a>
+                    <div class="er">
+                    	<div class="er_m">
+                            <i>&nbsp;</i>
+                            <ul>
+                                <li><a href="zbdl.html" style="color: #BD0E2A;">招标代理业务</a></li>
+                               <!--  <li><a href="zbdl2.html" style="color: #BD0E2A;">代做标书流程</a></li> -->
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+               
+                <li id="zyyw">
                 	<a href="../business.html">主营业务</a>
                 	<div class="er">
                     	<div class="er_m">
                             <i>&nbsp;</i>
                             <ul>
                             	<li><a href="../business.html" style="color: #BD0E2A;">项目招标代理</a></li>
-                            	<li><a href="../business.html">投标书制作</a></li>
                             	<li><a href="../business.html">工程预算</a></li>
                             	<li><a href="../business.html">工程结算</a></li>
                             	<li><a href="../business.html">开竣工资料</a></li>
                             	<li><a href="../business.html">工程技术咨询服务</a></li>
                             	<li><a href="../business.html">工程监理服务</a></li>
                             	<li><a href="../business.html">工程概算编制</a></li>
-                            	
+                            	<li><a href="../business.html">投标书制作</a></li>
 	                            <!-- <li><a href="business.html">工程类标书</a></li>
 	                            <li><a href="business.html">采购类标书</a></li>
 	                            <li><a href="business.html">服务类标书</a></li> -->
@@ -171,7 +160,7 @@
                         </div>
                     </div>
                 </li>
-                <li>
+                <li id="cgal">
                 	<a href="../case.html">成功案例</a>
                 	<div class="er">
                     	<div class="er_m">
@@ -182,19 +171,37 @@
                         </div>
                     </div>
                 </li>
-                <li class="now">
-                	<a href="../news.html">新闻活动</a>
+                <li id="xwzx" class="now">
+                	<a href="../news.html">新闻资讯</a>
                     <div class="er">
                     	<div class="er_m">
                             <i>&nbsp;</i>
                             <ul>
                                 <li><a href="../news.html">公司新闻</a></li>
                                 <li><a href="../news2.html">行业新闻</a></li>
+                                <li><a href="../news3.html">员工风采</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
-                <li>
+                 <li id="about">
+                	<a href="../about.html">关于我们</a>
+                    <div class="er">
+                    	<div class="er_m">
+                            <i>&nbsp;</i>
+                            <ul>
+                                <li><a href="../about.html">公司简介</a></li>
+                                <li><a href="../about3.html">组织架构</a></li>
+                                <!-- <li><a href="../about2.html">中楷众拓优势</a></li>
+                                <li><a href="../product.html">电力法</a></li>
+                                <li><a href="../product2.html">招投标法</a></li>
+                                <li><a href="../product3.html">政府采购法</a></li>
+                            	<li><a href="../product4.html">投标管理办法</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li id="lxwm">
                 	<a href="../contact.html">联系我们</a>
                     <div class="er">
                     	<div class="er_m">
@@ -202,7 +209,7 @@
                             <ul>
                                 <li><a href="../contact.html">联系方式</a></li>
                                 <li><a href="../book.html">客户留言</a></li>
-                                <li><a href="https://shop221796420.taobao.com" target="_blank">淘宝店铺</a></li>
+                              <!--   <li><a href="https://shop221796420.taobao.com" target="_blank">淘宝店铺</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -218,7 +225,7 @@
 	<div class="pst">
     	您当前的位置：
         <a href="../news.html">新闻活动</a>>
-        <a href="../news2.html">公司新闻</a>
+        <a href="../news2.html">行业新闻</a>
     </div>
 </div>
 <div class="scd clearfix">
@@ -230,6 +237,7 @@
         <ul class="s_nav">
         	<li ><a href="../news.html">公司新闻</a></li>
             <li class="now"><a href="../news2.html">行业新闻</a></li>
+            <li ><a href="../news3.html">员工风采</a></li>
         </ul>
         <div style="text-align: center;">
 		      <span>扫二维码了解更多信息</span><br/>
@@ -271,6 +279,52 @@
             </li>
         </ul>
         <ul class="f_nav clearfix">
+       		 <li><b>关于我们</b>
+				<p>
+					<a href="../about.html">公司简介</a>
+				</p>
+				
+				<p>
+					<a href="../about3.html">组织架构</a>
+				</p>
+			<!--  <p>
+					<a href="../about2.html">中楷众拓优势</a>
+				</p> -->
+				<p>
+					<a href="../contact.html">联系方式</a>
+				</p>
+				<p>
+					<a href="../book.html">在线留言</a>
+				</p> 
+			</li>
+			<li>
+				<b>新闻与活动</b>
+				<p>
+					<a href="news.html">公司新闻</a>
+				</p>
+				<p>
+					<a href="news2.html">行业新闻</a>
+				</p>
+				<p>
+					<a href="new3.html">员工风采</a>
+				</p>
+				<!-- <p>
+					<a href="product2.html">招投标法</a>
+				</p>
+				<p>
+					<a href="product3.html">政府采购法</a>
+				</p> 
+				<p>
+					<a href="product4.html">投标管理办法</a>
+				</p> -->
+				<!--  <b>联系我们</b>
+				<p>
+					<a href="contact.html">联系方式</a>
+				</p>
+				<p>
+					<a href="book.html">在线留言</a>
+				</p> -->
+				</li>
         	<li>
             	<b>友情链接</b>
             	###itemsYL###
@@ -281,23 +335,6 @@
                 <p><a href="../product4.html">投标管理办法</a></p>
                 <p><a href="../product4.html">投标管理办法</a></p>
                 <p><a href="../product4.html">投标管理办法</a></p> -->
-            </li>
-        	<li>
-            	<b>关于我们</b>
-                <p><a href="../about.html">公司简介</a></p>
-                <p><a href="../about2.html">中楷众拓优势</a></p>
-                <p><a href="../about3.html">组织架构</a></p>
-            </li>
-            
-            <li>
-            	
-                <b>新闻与活动</b>
-                <p><a href="../news.html">公司新闻</a></p>
-                <p><a href="../news2.html">行业新闻</a></p>
-                <b>联系我们</b>
-                <p><a href="../contact.html">联系方式</a></p>
-                <p><a href="../book.html">在线留言</a></p>
-                
             </li>
         </ul>
         <div class="f_ct clearfix">
