@@ -34,6 +34,7 @@
 					<select name="type" class="select">
 						<option value="1" <c:if test="${news.type ==1 }">selected="selected"</c:if>>公司新闻</option>
 						<option value="2" <c:if test="${news.type ==2 }">selected="selected"</c:if>>行业新闻</option>
+						<option value="3" <c:if test="${news.type ==3 }">selected="selected"</c:if>>员工风采</option>
 					</select>
 				</span>
 			</div>
